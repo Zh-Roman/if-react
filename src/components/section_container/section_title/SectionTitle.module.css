@@ -1,0 +1,25 @@
+.sectionTitle {
+    line-height: 47px;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.sectionTitle::after {
+    content: "";
+    display: block;
+    margin: 20px auto -24px;
+    height: 4px;
+    width: 100px;
+    background-color: #F5BD41;
+    position: relative;
+    top: -20px;
+    opacity: 0;
+    transition: all 1s ease 0.2s;
+}
+
+.sectionTitle:hover::after {
+    opacity: 1;
+    top: 0;
+}
+
