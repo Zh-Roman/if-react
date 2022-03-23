@@ -1,7 +1,7 @@
 import React from 'react';
 import './HomesGuestsLovesSection.css';
-import SectionTitle from '../section_container/section_title/SectionTitle';
-import HomesGuestsSectionBody from '../section_container/section_body/HomesGuestsSectionBody';
+import SectionTitle from '../../components/sectionContainer/sectionTitle/SectionTitle';
+import HomesGuestsSectionBody from '../../components/sectionContainer/sectionBody/HomesGuestsSectionBody';
 
 const data = [
   {

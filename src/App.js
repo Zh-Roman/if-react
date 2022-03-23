@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles/fonts.css';
 import './styles/App.css';
-import HomesGuestsLovesSection from './components/homes_guests_love_section/HomesGuestsLovesSection';
+import HomesGuestsLovesSection from './view/homesGuestsLovesSection/HomesGuestsLovesSection';
 
 function App() {
   return (
