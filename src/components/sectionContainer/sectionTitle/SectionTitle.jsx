@@ -2,11 +2,11 @@ import React from 'react';
 
 import classes from './SectionTitle.module.css';
 
-function SectionTitle({ children }, ...props) {
+function SectionTitle(props) {
   return (
 
     <h2 {...props} className={classes.sectionTitle}>
-      {children}
+      {props.children}
     </h2>
   );
 }

@@ -43,7 +43,7 @@
     position: absolute;
     width: 40px;
     height: 40px;
-    background-image: url(../../../assets/images/svg/arrowRight.svg);
+    background-image: url(/src/assets/images/svg/arrowRight.svg);
     background-repeat: no-repeat;
     background-size: 100% auto;
     background-position: center;

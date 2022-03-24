@@ -7,7 +7,7 @@ import SectionBodyItem from './SectionBodyItem';
 
 SwiperCore.use([Navigation]);
 
-function HomesGuestsSectionBody({ data }, ...props) {
+function HomesGuestsSectionBody(props) {
   return (
     <div {...props} className={classes.sectionBody}>
       <Swiper
@@ -17,7 +17,7 @@ function HomesGuestsSectionBody({ data }, ...props) {
         slidesPerView={4}
         loop
       >
-        {data.map((item) => <SwiperSlide key={item.id}><SectionBodyItem item={item} /></SwiperSlide>)}
+        {props.data.map((item) => <SwiperSlide key={item.id}><SectionBodyItem item={item} /></SwiperSlide>)}
       </Swiper>
     </div>
   );
