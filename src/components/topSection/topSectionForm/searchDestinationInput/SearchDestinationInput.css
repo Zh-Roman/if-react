@@ -1,0 +1,10 @@
+.search_destination_input{
+    flex-grow: 1;
+    padding: 0 24px;
+}
+
+.search_destination_input:focus-within {
+    border: 3px #F5BD41 solid;
+    border-radius: 8px;
+    margin: -3px;
+}

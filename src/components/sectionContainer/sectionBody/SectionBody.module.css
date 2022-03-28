@@ -1,0 +1,10 @@
+.sectionBody {
+    margin: 104px auto 0;
+    max-width: 1232px;
+    position: relative;
+}
+
+.without_slider{
+    display: flex;
+    justify-content: space-around;
+}
