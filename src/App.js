@@ -1,12 +1,16 @@
 import React from 'react';
 import './styles/fonts.css';
 import './styles/App.css';
-import HomesGuestsLovesSection from './view/homesGuestsLovesSection/HomesGuestsLovesSection';
+import HomesGuestsLovesSection from './modules/homesGuestsLovesSection/HomesGuestsLovesSection';
+import TopSection from './modules/topSection/TopSection';
 
 function App() {
   return (
     <div className="App">
-      <HomesGuestsLovesSection />
+      <main className="page">
+        <TopSection />
+        <HomesGuestsLovesSection />
+      </main>
     </div>
   );
 }

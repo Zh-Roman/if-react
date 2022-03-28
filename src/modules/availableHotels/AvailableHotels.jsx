@@ -1,7 +1,7 @@
 import React from 'react';
-import './HomesGuestsLovesSection.css';
+import './AvailableHotels.css';
 import SectionTitle from '../../components/sectionContainer/sectionTitle/SectionTitle';
-import HomesGuestsSectionBody from '../../components/sectionContainer/sectionBody/HomesGuestsSectionBody';
+import SliderWithFourItems from '../../components/sectionContainer/sectionBody/SliderWithFourItems';
 
 const data = [
   {
@@ -61,13 +61,23 @@ const data = [
     imageUrl: 'https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/the-andaman-resort_d2xksj.jpg',
   },
 ];
-function HomesGuestsLovesSection() {
+
+function AvailableHotels(props) {
+  const { valueFromInput } = props;
+  const dataUpdate = data.filter((item) => item.name.toLowerCase().includes(valueFromInput.toLowerCase())
+    || item.city.toLowerCase().includes(valueFromInput.toLowerCase())
+    || item.country.toLowerCase().includes(valueFromInput.toLowerCase()));
   return (
-    <div className="homesGuestsLoves">
-      <SectionTitle>Homes guests loves</SectionTitle>
-      <HomesGuestsSectionBody data={data} />
+    <div>
+      {valueFromInput !== '' && dataUpdate.length !== 0 && (
+        <div className="available_hotels">
+          <SectionTitle>Available hotels</SectionTitle>
+          <SliderWithFourItems data={dataUpdate} />
+        </div>
+      )}
     </div>
+
   );
 }
 
-export default HomesGuestsLovesSection;
+export default AvailableHotels;

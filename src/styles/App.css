@@ -7,10 +7,16 @@
     color: #383838;
     font-family: Roboto, sans-serif;
 }
+:active, :hover, :focus {
+    outline: none;
+}
 
 #root {
     min-height: 100%;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+}
+.page {
+    flex: 1 1 auto;
 }

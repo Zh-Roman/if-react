@@ -26,5 +26,6 @@ module.exports = {
     'react/destructuring-assignment': 'off',
     'import/no-unresolved': 'off',
     'linebreak-style': ['error', process.platform === 'win32' ? 'windows' : 'unix'],
+    'class-methods-use-this': 'off',
   },
 };

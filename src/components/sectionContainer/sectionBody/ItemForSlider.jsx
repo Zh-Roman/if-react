@@ -1,7 +1,7 @@
 import React from 'react';
-import './SectionBodyItem.css';
+import './ItemForSlider.css';
 
-function SectionBodyItem(props) {
+function ItemForSlider(props) {
   return (
     <div className="sectionBodyItem">
       <div className="section_image_box">
@@ -18,4 +18,4 @@ function SectionBodyItem(props) {
   );
 }
 
-export default SectionBodyItem;
+export default ItemForSlider;
