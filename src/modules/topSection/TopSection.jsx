@@ -3,7 +3,7 @@ import '../../components/sectionContainer/containerStyles/containerStyles.css';
 import './TopSection.css';
 import TopSectionTitle from '../../components/topSection/topSectionTitle/TopSectionTitle';
 import TopSectionForm from '../../components/topSection/topSectionForm/TopSectionForm';
-import AvailableHotels from '../availableHotels/AvailableHotels';
+import { AvailableHotels } from '../availableHotels/AvailableHotels';
 
 class TopSection extends React.Component {
   constructor(props) {

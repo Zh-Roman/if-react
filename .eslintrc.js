@@ -27,5 +27,6 @@ module.exports = {
     'import/no-unresolved': 'off',
     'linebreak-style': ['error', process.platform === 'win32' ? 'windows' : 'unix'],
     'class-methods-use-this': 'off',
+    'import/named': 'off',
   },
 };
