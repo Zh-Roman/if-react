@@ -4,6 +4,7 @@ import './TopSection.css';
 import TopSectionTitle from '../../components/topSection/topSectionTitle/TopSectionTitle';
 import TopSectionForm from '../../components/topSection/topSectionForm/TopSectionForm';
 import { AvailableHotels } from '../availableHotels/AvailableHotels';
+import Calendar from '../../components/topSection/topSectionForm/topSectionCalendar/Calendar';
 
 class TopSection extends React.Component {
   constructor(props) {
@@ -32,6 +33,7 @@ class TopSection extends React.Component {
             <TopSectionForm setValue={this.setValue} />
           </div>
         </section>
+        <Calendar />
         <AvailableHotels valueFromInput={valueFromInput} />
       </div>
     );

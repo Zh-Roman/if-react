@@ -24,7 +24,10 @@ class TopSectionForm extends React.Component {
         action="#"
         method="get"
         autoComplete="off"
-        onSubmit={() => { this.props.setValue(valueFromInput); }}
+        onSubmit={(event) => {
+          event.preventDefault();
+          this.props.setValue(valueFromInput);
+        }}
       >
         <SearchDestinationInput getValue={this.getValue} />
         <TopSectionFormButton />

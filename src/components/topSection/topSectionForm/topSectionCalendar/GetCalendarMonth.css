@@ -1,0 +1,38 @@
+.monthBody {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: auto;
+    justify-content: space-between;
+    justify-items: stretch;
+    align-content: space-around;
+    text-align: center;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 24px;
+    color: #4D4D4D;
+    list-style-type: none;
+}
+.currentDayTrue {
+    color: #3077C6;
+}
+.currentMonthPreviousDaysTrue {
+    color: #d4d4d4;
+}
+.monthBody .notCurrentMonthTrue {
+    color: #F3F3F4;
+    background-color: #FFFFFF;
+}
+.checkInDay {
+    background-color: #3077C6;
+    color: #FFFFFF;
+}
+.checkInDay ~ li {
+    background-color: #F3F3F4;
+}
+.monthBody .checkOutDay {
+    background-color: #BFBFBF;
+}
+.monthBody .checkOutDay ~ li {
+    background-color: #FFFFFF;
+}
