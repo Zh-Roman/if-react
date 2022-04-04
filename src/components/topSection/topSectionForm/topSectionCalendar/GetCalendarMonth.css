@@ -15,6 +15,8 @@
 }
 .currentDayTrue {
     color: #3077C6;
+    background-color: #EAF0F9;
+    border-radius: 8px;
 }
 .currentMonthPreviousDaysTrue {
     color: #d4d4d4;
@@ -26,12 +28,16 @@
 .checkInDay {
     background-color: #3077C6;
     color: #FFFFFF;
+    border-radius: 0;
 }
 .checkInDay ~ li {
     background-color: #F3F3F4;
 }
 .monthBody .checkOutDay {
     background-color: #BFBFBF;
+}
+.firstDayOfMonth, .firstDayOfMonth ~ li{
+    background-color: #F3F3F4;
 }
 .monthBody .checkOutDay ~ li {
     background-color: #FFFFFF;

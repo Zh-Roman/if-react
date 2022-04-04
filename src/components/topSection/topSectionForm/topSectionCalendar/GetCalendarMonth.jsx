@@ -3,7 +3,8 @@ import './GetCalendarMonth.css';
 
 function GetCalendarMonth(props) {
   const {
-    block, month, listOfDays, dayOfWeek, setCheckInDate, setCheckOutDate,
+    block, month, listOfDays, dayOfWeek, setCheckInDateFirstBlock, setStateForCalendar,
+    setCheckInDateSecondBlock, setCheckOutDate, checkInDateFromTheFirstBlock, listOfMonths,
   } = props;
   const daysInWeek = 7;
   let daysInMonth = listOfDays[month];
@@ -80,32 +81,58 @@ function GetCalendarMonth(props) {
     checkInDate: '',
     checkOutDate: '',
   });
+  const stateForCalendar = () => {
+    setStateForCalendar(false);
+  };
   const handleClick = (e) => {
-    const { id } = e.currentTarget;
-    if (checkingPeriod.checkInDate === '') {
-      setCheckInDate(e.currentTarget.value);
-      setCheckingPeriod({
-        checkInDate: id,
-        checkOutDate: '',
-      });
-    }
-    if (checkingPeriod.checkInDate !== '') {
-      setCheckOutDate(e.currentTarget.value);
-      setCheckingPeriod({
-        checkInDate: checkingPeriod.checkInDate,
-        checkOutDate: id,
-      });
+    const { id, value, className } = e.currentTarget;
+    const getCheckingPeriod = (setCheckInDate) => {
+      if (checkingPeriod.checkInDate !== '' && checkingPeriod.checkOutDate !== '') {
+        checkingPeriod.checkInDate = '';
+        checkingPeriod.checkOutDate = '';
+      }
+      if (checkingPeriod.checkInDate === '') {
+        setCheckInDate(`${value} ${listOfMonths[month]}`);
+        setCheckingPeriod({
+          checkInDate: id,
+          checkOutDate: '',
+        });
+      }
+      if (checkingPeriod.checkInDate !== '') {
+        if (Number(id) > Number(checkingPeriod.checkInDate)) {
+          setCheckOutDate(`${e.currentTarget.value} ${listOfMonths[month]}`);
+          setTimeout(stateForCalendar, 500);
+        }
+        setCheckingPeriod({
+          checkInDate: checkingPeriod.checkInDate,
+          checkOutDate: id,
+        });
+      }
+    };
+    if (!(className.includes('notCurrentMonthTrue') || className.includes('currentMonthPreviousDaysTrue'))) {
+      if (block === 'first') {
+        getCheckingPeriod(setCheckInDateFirstBlock);
+      } else if (checkInDateFromTheFirstBlock === 'Check-in') {
+        getCheckingPeriod(setCheckInDateSecondBlock);
+      } else {
+        setCheckOutDate(`${e.currentTarget.value} ${listOfMonths[month]}`);
+        setTimeout(stateForCalendar, 500);
+        setCheckingPeriod({
+          checkInDate: checkingPeriod.checkInDate,
+          checkOutDate: id,
+        });
+      }
     }
   };
   const checkingState = (arrayItem) => {
     let checkInDay = '';
     let checkOutDay = '';
+    let firstDayOfMonth = '';
     if (arrayItem.key.toString() === checkingPeriod.checkInDate && checkInDay === '') {
-      if (block === 'first') {
-        if (arrayItem.key >= currentDayKey) {
-          checkInDay = 'checkInDay';
-        }
-      } else {
+      if (arrayItem.key >= currentDayKey) {
+        checkInDay = 'checkInDay';
+      }
+      if (block === 'second') {
         checkInDay = 'checkInDay';
       }
     }
@@ -113,12 +140,16 @@ function GetCalendarMonth(props) {
       && Number(checkingPeriod.checkOutDate) > Number(checkingPeriod.checkInDate)) {
       checkOutDay = 'checkOutDay';
     }
+    if (block === 'second' && arrayItem.dayOfMonth === 1
+      && checkingPeriod.checkOutDate !== '' && checkingPeriod.checkInDate === '') {
+      firstDayOfMonth = 'firstDayOfMonth';
+    }
     return {
       checkInDay,
       checkOutDay,
+      firstDayOfMonth,
     };
   };
-
   return (
     <ul className="monthBody">
       {arrayOfObj.map((day) => (
@@ -134,6 +165,7 @@ function GetCalendarMonth(props) {
           ${day.previousDays} 
           ${checkingState(day).checkInDay}
           ${checkingState(day).checkOutDay}
+          ${checkingState(day).firstDayOfMonth}
           `}
         >
           {day.dayOfMonth}

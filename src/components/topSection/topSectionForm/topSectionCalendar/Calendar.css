@@ -1,8 +1,28 @@
 .calendar {
     display: flex;
-    background: #FFFFFF;
+    position: absolute;
+    top: 65px;
+    left: -200px;
+    background-color: #FFFFFF;
     border-radius: 8px;
+    animation: show_calendar 1s forwards;
 
+}
+@keyframes show_calendar {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+@keyframes hide_calendar {
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
 }
 
 .monthCalendar {
@@ -32,3 +52,18 @@
     color: #4D4D4D;
 }
 
+.arrow_for_calendar_next , .arrow_for_calendar_back{
+    padding: 10px 10px;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    width: 8px;
+    height: 18px;
+    background-image: url(/src/assets/images/svg/arrowForCalendar.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.arrow_for_calendar_back{
+    left: 15px;
+    transform: scale(-1,1);
+}

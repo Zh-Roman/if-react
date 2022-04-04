@@ -2,6 +2,7 @@ import React from 'react';
 import './TopSectionForm.css';
 import SearchDestinationInput from './searchDestinationInput/SearchDestinationInput';
 import TopSectionFormButton from './topSectionFromButton/TopSectionFormButton';
+import BookingPeriod from './bookingPeriod/BookingPeriod';
 
 class TopSectionForm extends React.Component {
   constructor(props) {
@@ -30,6 +31,7 @@ class TopSectionForm extends React.Component {
         }}
       >
         <SearchDestinationInput getValue={this.getValue} />
+        <BookingPeriod />
         <TopSectionFormButton />
       </form>
     );
