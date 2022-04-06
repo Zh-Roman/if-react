@@ -21,7 +21,7 @@
 .currentMonthPreviousDaysTrue {
     color: #d4d4d4;
 }
-.monthBody .notCurrentMonthTrue {
+.monthBody .currentMonthFalse {
     color: #F3F3F4;
     background-color: #FFFFFF;
 }

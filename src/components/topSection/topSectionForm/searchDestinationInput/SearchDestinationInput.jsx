@@ -1,33 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './SearchDestinationInput.css';
 
-class SearchDestinationInput extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      valueFromInput: '',
-    };
-  }
-
-  handleChange = (e) => {
-    this.setState({
-      valueFromInput: e.target.value,
-    });
-    this.props.getValue(e.target.value);
+function SearchDestinationInput(props) {
+  const [valueFromInput, setValue] = useState('');
+  const handleChange = (e) => {
+    setValue(e.target.value);
+    props.setValueForSubmit(e.target.value);
   };
 
-  render() {
-    const { valueFromInput } = this.state;
-    return (
-      <input
-        className="search_destination_input"
-        type="text"
-        value={valueFromInput}
-        onChange={this.handleChange}
-        placeholder="Your destination or hotel name"
-        required
-      />
-    );
-  }
+  return (
+    <input
+      className="search_destination_input"
+      type="text"
+      value={valueFromInput}
+      onChange={handleChange}
+      placeholder="Your destination or hotel name"
+      required
+    />
+  );
 }
+
 export default SearchDestinationInput;
