@@ -83,6 +83,8 @@ function Calendar(props) {
         <GetCalendarMonth
           setCounter={setCounter}
           getCheckInDateFirstBlock={props.getCheckInDateFirstBlock}
+          getCheckInDateSecondBlock={props.getCheckInDateSecondBlock}
+          checkInDateSecondBlock={props.checkInDateSecondBlock}
           getCheckOutDate={props.getCheckOutDate}
           block="first"
           month={currentMonth}

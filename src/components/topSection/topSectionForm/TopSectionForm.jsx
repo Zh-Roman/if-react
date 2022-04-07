@@ -3,6 +3,7 @@ import './TopSectionForm.css';
 import SearchDestinationInput from './searchDestinationInput/SearchDestinationInput';
 import TopSectionFormButton from './topSectionFromButton/TopSectionFormButton';
 import BookingPeriod from './bookingPeriod/BookingPeriod';
+import SearchConditions from './seacrhConditions/SearchConditions';
 
 function TopSectionForm(props) {
   const [valueForSubmit, setValueForSubmit] = useState('');
@@ -19,6 +20,7 @@ function TopSectionForm(props) {
     >
       <SearchDestinationInput setValueForSubmit={setValueForSubmit} />
       <BookingPeriod />
+      <SearchConditions />
       <TopSectionFormButton />
     </form>
   );

@@ -1,6 +1,9 @@
 .booking_period{
+    margin: 7px 0;
     position: relative;
     min-width: 200px;
+    border-left: 1px #3077c685 solid;
+    border-right: 1px #3077c685 solid;
 }
 .search_dates{
     display: flex;

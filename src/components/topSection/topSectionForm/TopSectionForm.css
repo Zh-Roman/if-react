@@ -15,3 +15,9 @@
     font-weight: 400;
     border: 0;
 }
+.top_section_form * {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

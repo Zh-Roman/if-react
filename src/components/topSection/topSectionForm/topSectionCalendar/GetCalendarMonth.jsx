@@ -90,6 +90,10 @@ function GetCalendarMonth(props) {
     if (!(className.includes('currentMonthFalse') || className.includes('currentMonthPreviousDaysTrue'))) {
       if (props.block === 'first') {
         getCheckingPeriod(props.getCheckInDateFirstBlock);
+        if (props.checkInDateSecondBlock !== '') {
+          props.getCheckInDateFirstBlock(`${e.currentTarget.value} ${props.listOfMonths[props.month]}`);
+          props.getCheckInDateSecondBlock('');
+        }
       } else if (props.checkInDateFromTheFirstBlock === '') {
         getCheckingPeriod(props.getCheckInDateSecondBlock);
       } else {
