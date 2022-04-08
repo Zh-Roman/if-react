@@ -6,5 +6,4 @@
 .search_destination_input:focus-within {
     border: 3px #F5BD41 solid;
     border-radius: 8px;
-    margin: -3px;
 }

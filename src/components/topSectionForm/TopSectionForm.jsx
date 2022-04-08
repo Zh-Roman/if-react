@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './TopSectionForm.css';
 import SearchDestinationInput from './searchDestinationInput/SearchDestinationInput';
-import TopSectionFormButton from './topSectionFromButton/TopSectionFormButton';
+import TopSectionFormButton from './topSectionFormButton/TopSectionFormButton';
 import BookingPeriod from './bookingPeriod/BookingPeriod';
 import SearchConditions from './seacrhConditions/SearchConditions';
 

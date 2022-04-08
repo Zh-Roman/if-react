@@ -6,13 +6,17 @@ function ConditionFilter(props) {
   const incrementValue = () => {
     if (props.conditionValue < props.maxValue) {
       props.setValue(props.conditionValue + 1);
-      props.setChildrenAgeOptionList([...props.childrenAgeOptionsList, { body: props.ageOptions, key: shortid.generate() }]);
+      if (props.childrenAgeOptionsList !== undefined) {
+        props.setChildrenAgeOptionList([...props.childrenAgeOptionsList, { body: props.ageOptions, key: shortid.generate() }]);
+      }
     }
   };
   const decrementValue = () => {
     if (props.conditionValue > props.minValue) {
       props.setValue(props.conditionValue - 1);
-      props.setChildrenAgeOptionList(props.childrenAgeOptionsList.slice(0, -1));
+      if (props.childrenAgeOptionsList !== undefined) {
+        props.setChildrenAgeOptionList(props.childrenAgeOptionsList.slice(0, -1));
+      }
     }
   };
   return (

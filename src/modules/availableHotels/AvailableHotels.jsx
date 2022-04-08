@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import './AvailableHotels.css';
-import SectionTitle from '../../components/sectionContainer/sectionTitle/SectionTitle';
-import SliderWithFourItems from '../../components/sectionContainer/sectionBody/SliderWithFourItems';
-import Loading from '../../components/loading/Loading';
+import SectionTitle from '../../components/sectionTitle/SectionTitle';
+import SliderWithFourItems from '../../components/sectionBodySlider/SliderWithFourItems';
+import Loading from '../../components/loadingProcess/Loading';
 import useFetch from '../../components/hooks/useFetch';
 
 const basicUrlForSearch = 'https://fe-student-api.herokuapp.com/api/hotels?';

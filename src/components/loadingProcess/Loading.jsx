@@ -1,7 +1,7 @@
 import React from 'react';
 import { Transition } from 'react-transition-group';
 import './Loading.css';
-import LoadingImage from '../../assets/images/loading_image/loading_image.png';
+import LoadingImage from '../../assets/images/imageForLoadingProcess/loading_image.png';
 
 function Loading(props) {
   return (

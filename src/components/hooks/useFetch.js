@@ -21,7 +21,7 @@ const useFetch = (urlForRequest, refForScroll) => {
           setLoading(false);
         }
       };
-      if (refForScroll !== undefined) { /* <-------     I just want you to see the loading process */
+      if (refForScroll !== undefined) { /* <-------     I just want you to see the loadingProcess process */
         setLoading(true);
         executeScrollToData();
         setTimeout(getData, 3000); /* <-------    And I know, that it's absolutely wrong  */
