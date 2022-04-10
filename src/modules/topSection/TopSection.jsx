@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import '../../components/containerStyles/containerStyles.css';
 import './TopSection.css';
 import TopSectionTitle from '../../components/topSectionTitle/TopSectionTitle';
 import TopSectionForm from '../../components/topSectionForm/TopSectionForm';
 import { AvailableHotels } from '../availableHotels/AvailableHotels';
+import TopSectionApps from '../../components/topSectionApps/TopSectionApps';
 
 function TopSection() {
   const [valueFromInput, getValueFromInput] = useState('');
@@ -19,6 +19,7 @@ function TopSection() {
           <TopSectionForm
             getValueFromInput={getValueFromInput}
           />
+          <TopSectionApps />
         </div>
       </section>
       <AvailableHotels

@@ -5,25 +5,29 @@ import SliderWithFourItems from '../../components/sectionBodySlider/SliderWithFo
 import Loading from '../../components/loadingProcess/Loading';
 import useFetch from '../../components/hooks/useFetch';
 
-const basicUrlForSearch = 'https://fe-student-api.herokuapp.com/api/hotels?';
+const basicUrlForSearch = 'https://fe-student-api.herokuapp.com/api/hotels';
 
 function AvailableHotels(props) {
+  const needNavigate = true;
   const availableHotelsRef = useRef(null);
   const { valueFromInput } = props;
   let urlForRequest = '';
   if (valueFromInput !== '') {
-    urlForRequest = `${basicUrlForSearch}search=${valueFromInput}`;
+    urlForRequest = `${basicUrlForSearch}?search=${valueFromInput}`;
   }
-  const { data, loading } = useFetch(urlForRequest, availableHotelsRef);
+  const { data: dataFromSearchRequest, loading } = useFetch(urlForRequest, availableHotelsRef);
   return (
     <div ref={availableHotelsRef}>
       <Loading
         loading={loading}
       />
-      {valueFromInput !== '' && data.length !== 0 && (
+      {valueFromInput !== '' && dataFromSearchRequest.length !== 0 && (
       <div className="available_hotels">
         <SectionTitle>Available hotels</SectionTitle>
-        <SliderWithFourItems data={data} />
+        <SliderWithFourItems
+          data={dataFromSearchRequest}
+          needNavigate={needNavigate}
+        />
       </div>
       )}
     </div>

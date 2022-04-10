@@ -9,7 +9,7 @@ SwiperCore.use([Navigation]);
 
 function SliderWithFourItems(props) {
   return (
-    <div {...props} className={classes.sectionBody}>
+    <div className={classes.sectionBody}>
       {props.data.length > 4 && (
         <Swiper
           navigation
@@ -18,11 +18,26 @@ function SliderWithFourItems(props) {
           slidesPerView={4}
           loop
         >
-          {props.data.map((item) => <SwiperSlide key={item.id}><ItemForSlider item={item} /></SwiperSlide>)}
+          {props.data.map((item) => (
+            <SwiperSlide key={item.id}>
+              <ItemForSlider
+                item={item}
+                needNavigate={props.needNavigate}
+              />
+            </SwiperSlide>
+          ))}
         </Swiper>
       )}
       {props.data.length <= 4 && (
-        <div className={classes.without_slider}>{props.data.map((item) => <ItemForSlider key={item.id} item={item} />)}</div>
+        <div className={classes.without_slider}>
+          {props.data.map((item) => (
+            <ItemForSlider
+              key={item.id}
+              item={item}
+              needNavigate={props.needNavigate}
+            />
+          ))}
+        </div>
       )}
     </div>
   );

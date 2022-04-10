@@ -1,9 +1,20 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './ItemForSlider.css';
 
 function ItemForSlider(props) {
+  const navigate = useNavigate();
+  const navigateToPage = () => {
+    if (props.needNavigate === true) {
+      navigate(`/hotels/${props.item.id}`);
+    }
+  };
   return (
-    <div className="sectionBodyItem">
+    <div
+      role="presentation"
+      className={props.needNavigate === true ? 'sectionBodyItem hover_frame' : 'sectionBodyItem'}
+      onClick={navigateToPage}
+    >
       <div className="section_image_box">
         <img className="content__img" src={props.item.imageUrl} alt={props.item.name} />
       </div>

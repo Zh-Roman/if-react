@@ -1,0 +1,27 @@
+.footer{
+    background-color: #10367C;
+}
+.footer_body {
+    display: flex;
+}
+
+.footer_content {
+    flex: 0 1 33.333%;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+.footer_content * {
+    color: #FFFFFF;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    margin-bottom: 24px;
+}
+.footer_content p {
+    font-weight: 500;
+}
+.copyright p{
+    font-size: 14px;
+    line-height: 16px;
+    color: #FFFFFF;
+}

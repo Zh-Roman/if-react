@@ -1,0 +1,7 @@
+.top_section_apps{
+    display: flex;
+    justify-content: center;
+}
+.top_section_apps :nth-child(2) {
+    margin-left: 16px;
+}
