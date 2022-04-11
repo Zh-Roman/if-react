@@ -3,4 +3,8 @@
     font-size: 50px;
     line-height: 59px;
     font-weight: 500;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }

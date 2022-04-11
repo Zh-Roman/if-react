@@ -1,11 +1,12 @@
 import React from 'react';
+import './Logo.css';
 import { Link } from 'react-router-dom';
-import LogoImage from '../../assets/images/svg/logo_vector.svg';
+import SpriteSVG from '../spriteSVG/SpriteSVG';
 
 function Logo() {
   return (
     <Link to="/">
-      <img src={LogoImage} alt="Logo" />
+      <SpriteSVG className="logo_vector" name="logo_vector" />
     </Link>
   );
 }

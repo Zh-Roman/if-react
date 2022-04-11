@@ -20,6 +20,7 @@
     align-self: flex-end;
     border-bottom: 4px #F5BD41 solid;
     margin-bottom: -4px;
+    margin-right: 24px;
     position: relative;
     top: -10px;
     opacity: 0;
@@ -29,4 +30,19 @@
 .menu_link:hover::after {
     top: 0;
     opacity: 1;
+}
+.account_icon{
+position: relative;
+}
+.accountCircle{
+    height: 40px;
+    width: 40px;
+    fill: #FFFFFF;
+}
+.night_icon{
+    height: 30px;
+    width: 30px;
+}
+._activeIcon {
+    fill: #F5BD41;
 }

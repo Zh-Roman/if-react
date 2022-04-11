@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import NightIcon from '../../assets/images/svg/night.svg';
-import AccountIcon from '../../assets/images/svg/accountCircle.svg';
 import './NavigationMenu.css';
+import SpriteSVG from '../spriteSVG/SpriteSVG';
+import useAuth from '../../hooks/useAuth';
+import SignOutElement from '../signOutElement/SignOutElement';
 
 function NavigationMenu() {
+  const { userAuthData } = useAuth();
+  const [dropDown, setDropDown] = useState(false);
+  const handleClick = () => {
+    setDropDown(!dropDown);
+  };
   return (
     <nav className="nav_menu">
       <ul className="menu_list">
@@ -17,10 +23,14 @@ function NavigationMenu() {
       </ul>
       <ul className="menu_icons">
         <li>
-          <img src={NightIcon} alt="NightIcon" />
+          <SpriteSVG className="night_icon" name="night_icon" />
         </li>
-        <li>
-          <img src={AccountIcon} alt="AccountIcon" />
+        <li role="presentation" onClick={handleClick} className="account_icon">
+          <SpriteSVG
+            className={userAuthData.userData === null || dropDown ? 'accountCircle _activeIcon' : 'accountCircle'}
+            name="accountCircle"
+          />
+          {dropDown && (<SignOutElement />)}
         </li>
       </ul>
     </nav>

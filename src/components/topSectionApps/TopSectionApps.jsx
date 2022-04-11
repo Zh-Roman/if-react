@@ -1,16 +1,15 @@
 import React from 'react';
 import './TopSectionApps.css';
-import GoogleBadge from '../../assets/images/svg/google-play-badge.svg';
-import AppleBadge from '../../assets/images/svg/App_Store_Badge.svg';
+import SpriteSVG from '../spriteSVG/SpriteSVG';
 
 function TopSectionApps() {
   return (
     <div className="top_section_apps">
       <a href="/">
-        <img src={GoogleBadge} alt="GoogleBadge" />
+        <SpriteSVG className="google_play_badge" name="google_play_badge" />
       </a>
       <a href="/">
-        <img src={AppleBadge} alt="AppleBadge" />
+        <SpriteSVG className="app_store_badge" name="app_store_badge" />
       </a>
     </div>
   );

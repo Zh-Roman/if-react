@@ -3,7 +3,7 @@ import './AvailableHotels.css';
 import SectionTitle from '../../components/sectionTitle/SectionTitle';
 import SliderWithFourItems from '../../components/sectionBodySlider/SliderWithFourItems';
 import Loading from '../../components/loadingProcess/Loading';
-import useFetch from '../../components/hooks/useFetch';
+import useFetch from '../../hooks/useFetch';
 
 const basicUrlForSearch = 'https://fe-student-api.herokuapp.com/api/hotels';
 

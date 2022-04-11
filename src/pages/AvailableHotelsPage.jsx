@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import useFetch from '../components/hooks/useFetch';
+import useFetch from '../hooks/useFetch';
 import Loading from '../components/loadingProcess/Loading';
 import HotelProfile from '../modules/hotelProfile/HotelProfile';
 
