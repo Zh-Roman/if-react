@@ -1,0 +1,27 @@
+.drop_down_list{
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    padding-top: 10px;
+}
+.list_of_selects{
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 5px;
+}
+.list_of_selects div{
+    border-color: #3077C6;
+    color: #383838;
+    max-height: 150px;
+    margin-bottom: 2px;
+}
+.list_of_selects svg{
+    fill: #3077C6;
+}
+.list_of_selects span{
+    background-color: #3077C6;
+}
+.list_of_selects span ~ div {
+    padding: 0;
+}

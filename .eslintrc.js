@@ -28,5 +28,6 @@ module.exports = {
     'linebreak-style': ['error', process.platform === 'win32' ? 'windows' : 'unix'],
     'class-methods-use-this': 'off',
     'import/named': 'off',
+    'react/jsx-no-constructed-context-values': 'off',
   },
 };

@@ -1,49 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useRef } from 'react';
 import './AvailableHotels.css';
-import SectionTitle from '../../components/sectionContainer/sectionTitle/SectionTitle';
-import SliderWithFourItems from '../../components/sectionContainer/sectionBody/SliderWithFourItems';
+import SectionTitle from '../../components/sectionTitle/SectionTitle';
+import SliderWithFourItems from '../../components/sectionBodySlider/SliderWithFourItems';
+import Loading from '../../components/loadingProcess/Loading';
+import useFetch from '../../hooks/useFetch';
 
-const basicUrlForSearch = 'https://fe-student-api.herokuapp.com/api/hotels?';
-
-const useFetch = (url) => {
-  const [data, setData] = useState([]);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        setLoading(true);
-        const res = await fetch(url);
-        const items = await res.json();
-        setData(items);
-        setLoading(false);
-      } catch (e) {
-        setError(e.message);
-        setLoading(false);
-      }
-    };
-    getData();
-  }, [url]);
-
-  return {
-    data,
-    error,
-    loading,
-  };
-};
+const basicUrlForSearch = 'https://fe-student-api.herokuapp.com/api/hotels';
 
 function AvailableHotels(props) {
+  const needNavigate = true;
+  const availableHotelsRef = useRef(null);
   const { valueFromInput } = props;
-  const urlForRequest = `${basicUrlForSearch}search=${valueFromInput}`;
-  const { data } = useFetch(urlForRequest);
+  let urlForRequest = '';
+  if (valueFromInput !== '') {
+    urlForRequest = `${basicUrlForSearch}?search=${valueFromInput}`;
+  }
+  const { data: dataFromSearchRequest, loading } = useFetch(urlForRequest, availableHotelsRef);
   return (
-    <div>
-      {valueFromInput !== '' && data.length !== 0 && (
-        <div className="available_hotels">
-          <SectionTitle>Available hotels</SectionTitle>
-          <SliderWithFourItems data={data} />
-        </div>
+    <div ref={availableHotelsRef}>
+      <Loading
+        loading={loading}
+      />
+      {valueFromInput !== '' && dataFromSearchRequest.length !== 0 && (
+      <div className="available_hotels">
+        <SectionTitle>Available hotels</SectionTitle>
+        <SliderWithFourItems
+          data={dataFromSearchRequest}
+          needNavigate={needNavigate}
+        />
+      </div>
       )}
     </div>
 

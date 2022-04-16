@@ -1,0 +1,15 @@
+.top_section_button {
+    width: 192px;
+    background-color: #3077C6;
+    border-radius: 8px;
+    border: 3px #3077C6 solid;
+    margin: -3px -3px -3px 0;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    color: #FFFFFF;
+}
+
+.top_section_button:hover {
+    box-shadow: 0 0 10px 0 #3077C6 inset, 0 0 10px 4px #3077C6;
+}

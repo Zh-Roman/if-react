@@ -1,0 +1,22 @@
+.booking_period{
+    margin: 7px 0;
+    position: relative;
+    min-width: 200px;
+    border-left: 1px #3077c685 solid;
+    border-right: 1px #3077c685 solid;
+}
+.search_dates{
+    display: flex;
+    height: 100%;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    font-size: 18px;
+    line-height: 21px;
+    font-weight: 400;
+}
+.color_frame {
+    border: 3px #F5BD41 solid;
+    margin: -3px 0;
+    border-radius: 8px;
+}

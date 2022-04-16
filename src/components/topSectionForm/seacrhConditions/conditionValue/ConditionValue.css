@@ -1,0 +1,11 @@
+.condition_value{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    font-size: 18px;
+    line-height: 21px;
+    font-weight: 400;
+}
+.value {
+    padding-right: 5px;
+}

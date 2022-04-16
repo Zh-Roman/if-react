@@ -1,0 +1,16 @@
+.top_section_apps{
+    display: flex;
+    justify-content: center;
+}
+.top_section_apps :nth-child(2) {
+    margin-left: 16px;
+}
+
+.app_store_badge{
+    width: 120px;
+    height: 40px;
+}
+.google_play_badge{
+    width: 135px;
+    height: 40px;
+}

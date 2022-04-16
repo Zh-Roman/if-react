@@ -2,21 +2,28 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-size: 24px;
-    line-height: 28px;
     color: #383838;
     font-family: Roboto, sans-serif;
+    list-style-type: none;
+    text-decoration: none;
 }
 :active, :hover, :focus {
     outline: none;
 }
-
+html, body {
+    height: 100%;
+}
 #root {
     min-height: 100%;
     overflow: hidden;
     display: flex;
     flex-direction: column;
 }
-.page {
+.main {
     flex: 1 1 auto;
+}
+._container {
+    max-width: 1232px;
+    padding: 120px 0;
+    margin: 0 auto;
 }
