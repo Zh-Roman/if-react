@@ -1,14 +1,13 @@
 import React from 'react';
 import './SignOutElement.css';
+import { useDispatch } from 'react-redux';
 import SpriteSVG from '../spriteSVG/SpriteSVG';
-import useAuth from '../../hooks/useAuth';
+import { ACTION_USER_AUTH } from '../../ducks/userAuthorization/actions';
 
 function SignOutElement() {
-  const { setUserAuthData } = useAuth();
+  const dispatch = useDispatch();
   const userSignOut = () => {
-    setUserAuthData({
-      userData: null,
-    });
+    dispatch(ACTION_USER_AUTH(null));
   };
   return (
     <div className="sign_out" role="presentation" onClick={userSignOut}>

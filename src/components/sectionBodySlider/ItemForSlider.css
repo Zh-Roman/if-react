@@ -7,6 +7,11 @@
 .section_image_box {
     height: 292px;
     width: 292px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
 .section_image_box img {
@@ -65,4 +70,40 @@
 }
 .hover_frame:hover {
     box-shadow: 0 0 10px 0 #3077c673  inset, 0 0 10px 4px #3077c673 ;
+}
+
+
+.hover_effect {
+    opacity: 0;
+    transition: all 1s ease-in 0.5s;
+}
+
+.hover_effect:hover {
+    opacity: 1;
+}
+
+.reservation__shadow{
+    min-width: 100%;
+    min-height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(56, 56, 56, 0.4);
+    box-shadow: 0 4px 70px 0 rgba(56, 56, 56, 0.5) inset;
+}
+.reservation__booking {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.booking_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    border: 1px #3077C6 solid;
+    width: 128px;
+    height: 48px;
 }

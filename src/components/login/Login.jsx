@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
-import useAuth from '../../hooks/useAuth';
+import { useDispatch } from 'react-redux';
+import { ACTION_USER_AUTH } from '../../ducks/userAuthorization/actions';
 
 function Login() {
+  const dispatch = useDispatch();
   const navigateToHomePage = useNavigate();
   const [loginValues, setLoginValues] = useState({
     email: '',
     password: '',
   });
-  const { setUserAuthData } = useAuth();
   const handleChange = (e) => {
     setLoginValues((prevState) => ({
       ...prevState,
@@ -18,7 +19,7 @@ function Login() {
   };
   const userAuth = (e) => {
     e.preventDefault();
-    setUserAuthData({ userData: { loginValues } });
+    dispatch(ACTION_USER_AUTH(loginValues));
     navigateToHomePage('/');
   };
   return (

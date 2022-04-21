@@ -15,16 +15,28 @@ function ItemForSlider(props) {
       className={props.needNavigate === true ? 'sectionBodyItem hover_frame' : 'sectionBodyItem'}
       onClick={navigateToPage}
     >
-      <div className="section_image_box">
-        <img className="content__img" src={props.item.imageUrl} alt={props.item.name} />
+      <div>
+        <div className="section_image_box">
+          <img className="content__img" src={props.item.imageUrl} alt={props.item.name} />
+          {props.item.country === undefined && (
+            <div className="hover_effect">
+              <div className="reservation__shadow" />
+              <div className="reservation__booking booking_button">
+                <a href="/">Book now</a>
+              </div>
+            </div>
+          )}
+        </div>
+        <p className="place-name">{props.item.name}</p>
+        {props.item.country !== undefined && (
+        <p className="place-location">
+          {props.item.city}
+          ,
+          {' '}
+          {props.item.country}
+        </p>
+        )}
       </div>
-      <p className="place-name">{props.item.name}</p>
-      <p className="place-location">
-        {props.item.city}
-        ,
-        {' '}
-        {props.item.country}
-      </p>
     </div>
   );
 }

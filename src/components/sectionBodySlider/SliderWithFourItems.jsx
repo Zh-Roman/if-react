@@ -2,14 +2,15 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation } from 'swiper';
 import 'swiper/css/bundle';
-import classes from './SectionBody.module.css';
+import './SectionBody.css';
+
 import ItemForSlider from './ItemForSlider';
 
 SwiperCore.use([Navigation]);
 
 function SliderWithFourItems(props) {
   return (
-    <div className={classes.sectionBody}>
+    <div className={`sectionBody ${props.className}`}>
       {props.data.length > 4 && (
         <Swiper
           navigation
@@ -29,7 +30,7 @@ function SliderWithFourItems(props) {
         </Swiper>
       )}
       {props.data.length <= 4 && (
-        <div className={classes.without_slider}>
+        <div className="without_slider">
           {props.data.map((item) => (
             <ItemForSlider
               key={item.id}
