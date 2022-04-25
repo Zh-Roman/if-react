@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './NavigationMenu.css';
+import { useSelector } from 'react-redux';
 import SpriteSVG from '../spriteSVG/SpriteSVG';
-import useAuth from '../../hooks/useAuth';
 import SignOutElement from '../signOutElement/SignOutElement';
+import userAuthSelector from '../../ducks/userAuthorization/selectors';
 
 function NavigationMenu() {
-  const { userAuthData } = useAuth();
+  const userAuthData = useSelector(userAuthSelector);
   const [dropDown, setDropDown] = useState(false);
   const handleClick = () => {
     setDropDown(!dropDown);
@@ -27,7 +28,7 @@ function NavigationMenu() {
         </li>
         <li role="presentation" onClick={handleClick} className="account_icon">
           <SpriteSVG
-            className={userAuthData.userData === null || dropDown ? 'accountCircle _activeIcon' : 'accountCircle'}
+            className={userAuthData === null || dropDown ? 'accountCircle _activeIcon' : 'accountCircle'}
             name="accountCircle"
           />
           {dropDown && (<SignOutElement />)}

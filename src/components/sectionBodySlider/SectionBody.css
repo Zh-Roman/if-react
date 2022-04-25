@@ -8,3 +8,6 @@
     display: flex;
     justify-content: space-around;
 }
+.reset_margin{
+    margin-top: 64px;
+}

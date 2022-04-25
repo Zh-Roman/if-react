@@ -29,5 +29,8 @@ module.exports = {
     'class-methods-use-this': 'off',
     'import/named': 'off',
     'react/jsx-no-constructed-context-values': 'off',
+    'no-underscore-dangle': 'off',
+    'default-param-last': 'off',
+    'global-require': 'off',
   },
 };
