@@ -1,5 +1,4 @@
 .booking_period{
-    margin: 7px 0;
     position: relative;
     min-width: 200px;
     border-left: 1px #3077c685 solid;
@@ -19,4 +18,13 @@
     border: 3px #F5BD41 solid;
     margin: -3px 0;
     border-radius: 8px;
+}
+.night_stay{
+    position: absolute;
+    left: 50%;
+    bottom: 2px;
+    transform: translateX(-50%);
+    font-size: 12px;
+    line-height: 14px;
+    color: #3077C6;
 }

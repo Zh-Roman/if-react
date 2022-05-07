@@ -1,2 +1,2 @@
-const userAuthSelector = (state) => state.userData;
+const userAuthSelector = (state) => state.userAuthData.userData;
 export default userAuthSelector;

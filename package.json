@@ -14,7 +14,9 @@
     "react-select": "^5.2.2",
     "react-transition-group": "^4.4.2",
     "redux": "^4.2.0",
+    "redux-actions": "^2.6.5",
     "redux-devtools-extension": "^2.13.9",
+    "redux-persist": "^6.0.0",
     "shortid": "^2.2.16",
     "swiper": "^8.0.7",
     "web-vitals": "^2.1.4"

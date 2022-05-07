@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { ACTION_USER_AUTH } from '../../ducks/userAuthorization/actions';
+import actionUserAuth from '../../ducks/userAuthorization/actions';
 
 function Login() {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ function Login() {
   };
   const userAuth = (e) => {
     e.preventDefault();
-    dispatch(ACTION_USER_AUTH(loginValues));
+    dispatch(actionUserAuth(loginValues));
     navigateToHomePage('/');
   };
   return (

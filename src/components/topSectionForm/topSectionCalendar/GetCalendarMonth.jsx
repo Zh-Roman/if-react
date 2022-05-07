@@ -77,6 +77,7 @@ function GetCalendarMonth(props) {
       if (checkingPeriod.checkInDate !== '') {
         if (Number(id) > Number(checkingPeriod.checkInDate)) {
           props.getCheckOutDate(`${e.currentTarget.value} ${props.listOfMonths[props.month]}`);
+          props.setCheckOutDateBlock(props.block);
           props.getCheckInDateFirstBlock('');
           setTimeout(props.setStateForCalendar(false), 500);
           props.setCounter(-1);
@@ -98,6 +99,7 @@ function GetCalendarMonth(props) {
         getCheckingPeriod(props.getCheckInDateSecondBlock);
       } else {
         props.getCheckOutDate(`${e.currentTarget.value} ${props.listOfMonths[props.month]}`);
+        props.setCheckOutDateBlock(props.block);
         props.getCheckInDateFirstBlock('');
         setTimeout(props.setStateForCalendar(false), 500);
         props.setCounter(-1);

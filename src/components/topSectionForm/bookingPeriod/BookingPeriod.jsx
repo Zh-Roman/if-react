@@ -10,6 +10,9 @@ function BookingPeriod() {
   const [checkInDateFirstBlock, getCheckInDateFirstBlock] = useState('');
   const [checkInDateSecondBlock, getCheckInDateSecondBlock] = useState('');
   const [checkOutDate, getCheckOutDate] = useState('');
+  const [checkOutDateBlock, setCheckOutDateBlock] = useState('');
+  const [currentMonthYear, setCurrentMonthYear] = useState('');
+  const [nextMonthYear, setNextMonthYear] = useState('');
   const [stateForCalendar, setStateForCalendar] = useState(false);
   const bookingPeriodValue = (partOfPeriod, valueFromCalendar) => {
     if (partOfPeriod[partOfPeriod.length - 1] !== valueFromCalendar && valueFromCalendar !== '') {
@@ -19,7 +22,26 @@ function BookingPeriod() {
   bookingPeriodValue(checkInValue, checkInDateFirstBlock);
   bookingPeriodValue(checkInValue, checkInDateSecondBlock);
   bookingPeriodValue(checkOutValue, checkOutDate);
-
+  const nightStay = (checkIn, checkOut) => {
+    let start;
+    let end;
+    if (checkInDateSecondBlock) {
+      start = new Date(`${checkIn}, ${nextMonthYear}`);
+    } else {
+      start = new Date(`${checkIn}, ${currentMonthYear}`);
+    }
+    if (checkOutDateBlock === 'first') {
+      end = new Date(`${checkOut}, ${currentMonthYear}`);
+    } else {
+      end = new Date(`${checkOut}, ${nextMonthYear}`);
+    }
+    let nightCount = 0;
+    while (end > start) {
+      nightCount += 1;
+      start.setDate(start.getDate() + 1);
+    }
+    return nightCount;
+  };
   return (
     <div className={`booking_period ${stateForCalendar && 'color_frame'}`}>
       <div role="presentation" className="search_dates" onClick={() => setStateForCalendar(!stateForCalendar)}>
@@ -31,6 +53,12 @@ function BookingPeriod() {
           checkOutValue={checkOutValue[checkOutValue.length - 1]}
         />
       </div>
+      {checkOutValue[checkOutValue.length - 1] !== 'Check-out' && (
+        <div className="night_stay">
+          { `${nightStay(checkInValue[checkInValue.length - 1], checkOutValue[checkOutValue.length - 1])}
+          - night stay`}
+        </div>
+      )}
       <Transition
         in={stateForCalendar}
         timeout={500}
@@ -39,6 +67,9 @@ function BookingPeriod() {
       >
         {((state) => (
           <Calendar
+            setCurrentMonthYear={setCurrentMonthYear}
+            setNextMonthYear={setNextMonthYear}
+            setCheckOutDateBlock={setCheckOutDateBlock}
             checkInDateFirstBlock={checkInDateFirstBlock}
             checkInDateSecondBlock={checkInDateSecondBlock}
             checkOutDate={checkOutDate}
