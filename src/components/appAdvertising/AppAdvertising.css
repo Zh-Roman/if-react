@@ -1,0 +1,46 @@
+.app_advertising {
+    background-color: #EAF0F9;
+    padding: 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 60%;
+    margin: 5px auto;
+    box-shadow: 0 10px 6px -6px #777;
+    position: relative;
+}
+.app_icon{
+    background-color: #3077C6;
+    height: 90px;
+    width: 90px;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 6px -6px #777;
+}
+.app_logo{
+    width: 80px;
+    height: 16px;
+    fill: #FFFFFF;
+}
+.adv_offer{
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+}
+.install_button{
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 40px;
+    color: #3077C6;
+}
+.close_button{
+    position: absolute;
+    top: 12px;
+    right: 12px;
+}
+.close_button_icon{
+    height: 24px;
+    width: 24px;
+}

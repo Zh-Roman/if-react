@@ -2,10 +2,13 @@
     width: 100%;
     height: 100vh;
     background-color: #EAF0F9;
+    position: relative;
+}
+.loading_body{
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
 }
 .loading_image{
     display: block;

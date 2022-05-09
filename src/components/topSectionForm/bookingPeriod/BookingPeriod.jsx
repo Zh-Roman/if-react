@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Transition } from 'react-transition-group';
 import './BookingPeriod.css';
 import BookingDateCard from './BookingDateCard';
@@ -6,7 +6,7 @@ import Calendar from '../topSectionCalendar/Calendar';
 
 const checkInValue = ['Check-in'];
 const checkOutValue = ['Check-out'];
-function BookingPeriod() {
+function BookingPeriod(props) {
   const [checkInDateFirstBlock, getCheckInDateFirstBlock] = useState('');
   const [checkInDateSecondBlock, getCheckInDateSecondBlock] = useState('');
   const [checkOutDate, getCheckOutDate] = useState('');
@@ -42,6 +42,24 @@ function BookingPeriod() {
     }
     return nightCount;
   };
+  const dateFromWithoutYear = checkInValue[checkInValue.length - 1];
+  const dateToWithoutYear = checkOutValue[checkOutValue.length - 1];
+  useEffect(() => {
+    let dateFrom;
+    let dateTo;
+    if (checkInDateSecondBlock) {
+      dateFrom = new Date(`${dateFromWithoutYear}, ${nextMonthYear}`).getTime();
+    } else {
+      dateFrom = new Date(`${dateFromWithoutYear}, ${currentMonthYear}`).getTime();
+    }
+    if (checkOutDateBlock === 'first') {
+      dateTo = new Date(`${dateToWithoutYear}, ${currentMonthYear}`).getTime();
+    } else {
+      dateTo = new Date(`${dateToWithoutYear}, ${nextMonthYear}`).getTime();
+    }
+    props.setDateFromValue(dateFrom);
+    props.setDateToValue(dateTo);
+  }, [dateFromWithoutYear, dateToWithoutYear]);
   return (
     <div className={`booking_period ${stateForCalendar && 'color_frame'}`}>
       <div role="presentation" className="search_dates" onClick={() => setStateForCalendar(!stateForCalendar)}>

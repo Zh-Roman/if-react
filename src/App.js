@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage';
 import AvailableHotelsPage from './pages/AvailableHotelsPage';
 import LoginPage from './pages/LoginPage';
 import RequireAuth from './components/requireAuth/RequireAuth';
+import ErrorPage from './pages/ErrorPage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route element={<RequireAuth />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/hotels/:hotelId" element={<AvailableHotelsPage />} />
+            <Route path="/error" element={<ErrorPage />} />
           </Route>
         </Routes>
       </main>

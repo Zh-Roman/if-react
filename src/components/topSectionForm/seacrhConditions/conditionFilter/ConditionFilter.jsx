@@ -7,7 +7,7 @@ function ConditionFilter(props) {
     if (props.conditionValue < props.maxValue) {
       props.setValue(props.conditionValue + 1);
       if (props.childrenAgeOptionsList !== undefined) {
-        props.setChildrenAgeOptionList([...props.childrenAgeOptionsList, { body: props.ageOptions, key: shortid.generate() }]);
+        props.setChildrenAgeOptionList([...props.childrenAgeOptionsList, { key: shortid.generate(), id: props.conditionValue }]);
       }
     }
   };
