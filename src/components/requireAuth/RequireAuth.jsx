@@ -5,7 +5,6 @@ import userAuthSelector from '../../ducks/userAuthorization/selectors';
 function RequireAuth() {
   const userAuthData = useSelector(userAuthSelector);
   const location = useLocation();
-
   return (
     userAuthData !== null
       ? <Outlet />

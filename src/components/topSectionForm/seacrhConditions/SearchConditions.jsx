@@ -1,28 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Transition } from 'react-transition-group';
 import './SearchConditions.css';
 import ConditionValue from './conditionValue/ConditionValue';
 import ConditionFilter from './conditionFilter/ConditionFilter';
 import DropDownList from './dropDownList/DropDownList';
 
-function SearchConditions() {
+function SearchConditions(props) {
   const minChildrenValue = 0;
   const minOtherValue = 1;
   const maxChildrenValue = 10;
   const maxOtherValue = 30;
-  const ageOptions = [];
+  const ageOptions = [{
+    value: 'Indicate age',
+    label: 'Indicate age',
+  }];
   for (let i = 0; i <= 17; i += 1) {
     const option = {
-      value: `${i} years old`,
+      value: `${i}`,
       label: `${i} years old`,
     };
     ageOptions.push(option);
   }
-  const [adultsValue, setAdultsValue] = useState(minOtherValue);
+  const [adultsValue, setAdultsValue] = useState(1);
   const [childrenValue, setChildrenValue] = useState(minChildrenValue);
   const [childrenAgeOptionsList, setChildrenAgeOptionList] = useState([]);
-  const [roomsValue, setRoomsValue] = useState(minOtherValue);
+  const [roomValue, setRoomValue] = useState(minOtherValue);
   const [stateForFilter, setStateForFilter] = useState(false);
+  useEffect(() => {
+    props.setAdultsValue(adultsValue);
+    props.setRoomsValues(roomValue);
+  }, [adultsValue, roomValue]);
   return (
     <div
       className={`search_condition ${stateForFilter && 'color_frame'}`}
@@ -39,7 +46,7 @@ function SearchConditions() {
         />
         <span>&nbsp;—&nbsp;</span>
         <ConditionValue
-          conditionValue={roomsValue}
+          conditionValue={roomValue}
           conditionTitle="Rooms"
         />
       </div>
@@ -72,13 +79,15 @@ function SearchConditions() {
             <ConditionFilter
               minValue={minOtherValue}
               maxValue={maxOtherValue}
-              conditionValue={roomsValue}
-              setValue={setRoomsValue}
+              conditionValue={roomValue}
+              setValue={setRoomValue}
               filterTitle="Rooms"
             />
             <DropDownList
+              setChildrenValue={props.setChildrenValue}
               childrenValue={childrenValue}
               childrenAgeOptionsList={childrenAgeOptionsList}
+              ageOptions={ageOptions}
             />
           </div>
         ))}

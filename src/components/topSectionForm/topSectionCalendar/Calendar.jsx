@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import GetCalendarMonth from './GetCalendarMonth';
 import './Calendar.css';
 
@@ -61,11 +61,15 @@ function Calendar(props) {
       }
     }
   };
+  useEffect(() => {
+    props.setCurrentMonthYear(currentMonthYear.toString());
+    props.setNextMonthYear(nextMonthYear.toString());
+  }, [currentMonthYear, nextMonthYear]);
   return (
     <div className={props.calendarClassName}>
       <div role="presentation" className="arrow_for_calendar_next" onClick={calendarSliderNext} />
       {backArrowCalendar && (
-      <div role="presentation" className="arrow_for_calendar_back" onClick={calendarSliderBack} />
+        <div role="presentation" className="arrow_for_calendar_back" onClick={calendarSliderBack} />
       )}
       <div id="firstMonth" className="monthCalendar">
         <div className="monthTitle">
@@ -81,6 +85,7 @@ function Calendar(props) {
           </div>
         </div>
         <GetCalendarMonth
+          setCheckOutDateBlock={props.setCheckOutDateBlock}
           setCounter={setCounter}
           getCheckInDateFirstBlock={props.getCheckInDateFirstBlock}
           getCheckInDateSecondBlock={props.getCheckInDateSecondBlock}
@@ -108,6 +113,7 @@ function Calendar(props) {
           </div>
         </div>
         <GetCalendarMonth
+          setCheckOutDateBlock={props.setCheckOutDateBlock}
           setCounter={setCounter}
           checkInDateFromTheFirstBlock={props.checkInDateFirstBlock}
           getCheckInDateFirstBlock={props.getCheckInDateFirstBlock}
@@ -124,4 +130,5 @@ function Calendar(props) {
     </div>
   );
 }
+
 export default Calendar;

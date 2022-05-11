@@ -1,0 +1,33 @@
+.user_review{
+    margin: 24px;
+}
+.accountCircleReview{
+    height: 54px;
+    width: 54px;
+    fill: #BFBFBF;
+    margin-right: 16px;
+}
+.review{
+    margin-top: 17px;
+    white-space: pre-line;
+    text-align: justify;
+}
+.user_info {
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+}
+.user_info img {
+    height: 24px;
+    width: 24px;
+}
+.user_info span{
+    color: #BFBFBF;
+    margin-left: 5px;
+}
+.country_info{
+    display: flex;
+    align-items: center;
+}

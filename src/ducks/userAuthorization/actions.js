@@ -1,6 +1,4 @@
-export const USER_AUTH = 'USER_AUTH';
+import { createAction } from 'redux-actions';
 
-export const ACTION_USER_AUTH = (payload) => ({
-  type: USER_AUTH,
-  payload,
-});
+const actionUserAuth = createAction('USER_AUTH');
+export default actionUserAuth;

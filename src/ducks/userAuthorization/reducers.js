@@ -1,16 +1,14 @@
-import { USER_AUTH } from './actions';
+import { handleActions } from 'redux-actions';
+import actionUserAuth from './actions';
 
 export const initialUserData = {
   userData: null,
 };
 
-export const userAuthReducer = (state = initialUserData, action) => {
-  switch (action.type) {
-    case USER_AUTH:
-      return {
-        userData: action.payload,
-      };
-    default:
-      return state;
-  }
+const handlers = {
+  [actionUserAuth]: (state, action) => ({
+    ...state,
+    userData: action.payload,
+  }),
 };
+export default handleActions(handlers, initialUserData);
