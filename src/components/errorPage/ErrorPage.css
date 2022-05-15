@@ -1,0 +1,23 @@
+.error_page{
+    min-height: 100vh;
+    background: url("/src/assets/images/loading_error_images/error_background.jpg") center no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.error_logo{
+    color: rgba(234, 240, 249, 0.6);
+    font-size: 250px;
+    font-weight: 800;
+}
+.error_message{
+    color: #EAF0F9;
+    font-size: 28px;
+    font-weight: 500;
+    text-align: center;
+}
+.error_to_home{
+    color: #F5BD41;
+}

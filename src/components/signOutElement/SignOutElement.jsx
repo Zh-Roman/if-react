@@ -48,7 +48,7 @@ const StyleSignOutElementText = styled.p`
 function SignOutElement() {
   const dispatch = useDispatch();
   const userSignOut = () => {
-    dispatch(actionUserAuth(null));
+    dispatch(ACTION_USER_AUTH(null));
   };
   return (
     <StyleSignOutElement role="presentation" onClick={userSignOut}>
