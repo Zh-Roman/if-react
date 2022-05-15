@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import './Login.css';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import actionUserAuth from '../../ducks/userAuthorization/actions';
+import {
+  StyleLogin, LoginForm, LoginTitle, LabelInput, LoginText, LoginInput, LoginButton,
+} from './StyleLogin';
 
 function Login() {
   const dispatch = useDispatch();
@@ -23,12 +25,12 @@ function Login() {
     navigateToHomePage('/');
   };
   return (
-    <div className="login_page">
-      <form action="#" className="login_form" autoComplete="off" onSubmit={userAuth}>
-        <h3 className="login_title">Sign in</h3>
-        <label htmlFor="loginEmail" className="label_input">
-          <p>Email address</p>
-          <input
+    <StyleLogin>
+      <LoginForm action="#" autoComplete="off" onSubmit={userAuth}>
+        <LoginTitle>Sign in</LoginTitle>
+        <LabelInput htmlFor="loginEmail">
+          <LoginText>Email address</LoginText>
+          <LoginInput
             id="loginEmail"
             type="email"
             name="email"
@@ -36,10 +38,10 @@ function Login() {
             onChange={handleChange}
             required
           />
-        </label>
-        <label htmlFor="loginPassword" className="label_input">
-          <p>Password</p>
-          <input
+        </LabelInput>
+        <LabelInput htmlFor="loginPassword">
+          <LoginText>Password</LoginText>
+          <LoginInput
             id="loginPassword"
             type="password"
             name="password"
@@ -47,10 +49,10 @@ function Login() {
             onChange={handleChange}
             required
           />
-        </label>
-        <button type="submit" className="login_button">Sign in</button>
-      </form>
-    </div>
+        </LabelInput>
+        <LoginButton type="submit">Sign in</LoginButton>
+      </LoginForm>
+    </StyleLogin>
   );
 }
 

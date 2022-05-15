@@ -2,17 +2,15 @@ import { handleActions } from 'redux-actions';
 import { getUserQueryFailed, getUserQueryRequested, getUserQuerySucceeded } from './actions';
 
 export const initialUserQuery = {
-  queryURL: null,
   queryData: null,
   loading: false,
   error: null,
 };
 
 const handlers = {
-  [getUserQueryRequested]: (state, action) => ({
+  [getUserQueryRequested]: (state) => ({
     ...state,
     loading: true,
-    queryURL: action.payload,
   }),
   [getUserQuerySucceeded]: (state, action) => ({
     ...state,

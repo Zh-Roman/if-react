@@ -1,14 +1,19 @@
 import React from 'react';
-import './AdvantagesCard.css';
+import PropTypes from 'prop-types';
 import SpriteSVG from '../spriteSVG/SpriteSVG';
+import { AdvantagesCardText, StyleAdvantagesCard } from './StyleAdvantagesCard';
 
 function AdvantagesCard(props) {
   return (
-    <div className="advantages_card">
+    <StyleAdvantagesCard>
       <SpriteSVG className="content_icon" name={props.advantageType} />
-      <p>{props.advantageTitle}</p>
-    </div>
+      <AdvantagesCardText>{props.advantageTitle}</AdvantagesCardText>
+    </StyleAdvantagesCard>
   );
 }
 
+AdvantagesCard.propTypes = {
+  advantageType: PropTypes.string.isRequired,
+  advantageTitle: PropTypes.string.isRequired,
+};
 export default AdvantagesCard;

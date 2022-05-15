@@ -1,9 +1,0 @@
-.top_section {
-    min-height: 100vh;
-    background: url("/src/assets/images/topSectionBackground/background_picture.jpg") center no-repeat;
-    background-size: cover;
-}
-
-.top_section_container{
-    padding-top: 296px;
-}

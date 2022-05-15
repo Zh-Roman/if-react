@@ -1,8 +1,23 @@
 import React, { useEffect, useRef } from 'react';
-import './TopSection.css';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import TopSectionTitle from '../../components/topSectionTitle/TopSectionTitle';
 import TopSectionForm from '../../components/topSectionForm/TopSectionForm';
 import TopSectionApps from '../../components/topSectionApps/TopSectionApps';
+import mainBackground from '../../assets/images/topSectionBackground/background_picture.jpg';
+
+const StyleTopSection = styled.section`
+  min-height: 100vh;
+  background: url(${mainBackground}) center no-repeat;
+  background-size: cover;
+`;
+
+const TopSectionContainer = styled.div`
+  padding-top: 296px;
+  @media screen and (max-width: 1280px) {
+    padding-top: 148px;
+  }
+`;
 
 function TopSection(props) {
   const topScreenRef = useRef(null);
@@ -10,20 +25,22 @@ function TopSection(props) {
     props.setRef(topScreenRef);
   }, [props.loading]);
   return (
-    <div>
-      <section className="top_section" ref={topScreenRef}>
-        <div className="top_section_container _container">
-          <TopSectionTitle>
-            Discover stays
-            <br />
-            to live, work or just relax
-          </TopSectionTitle>
-          <TopSectionForm />
-          <TopSectionApps />
-        </div>
-      </section>
-    </div>
+    <StyleTopSection ref={topScreenRef}>
+      <TopSectionContainer className="_container">
+        <TopSectionTitle>
+          Discover stays
+          <br />
+          to live, work or just relax
+        </TopSectionTitle>
+        <TopSectionForm />
+        <TopSectionApps />
+      </TopSectionContainer>
+    </StyleTopSection>
   );
 }
 
+TopSection.propTypes = {
+  setRef: PropTypes.func.isRequired,
+  loading: PropTypes.bool,
+};
 export default TopSection;

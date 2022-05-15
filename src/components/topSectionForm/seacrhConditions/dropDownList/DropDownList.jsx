@@ -1,5 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import './DropDownList.css';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import {
+  DropDownListOfSelects,
+  DropDownListTitle,
+  DropDownOption,
+  DropDownSelect,
+  StyleDropDownList,
+} from './StyleDropDownList';
+
+const DropDownListGridColumn = styled.div`
+  @media screen and (min-width: 768px) {
+    grid-column-start: 1;
+    grid-column-end: 4;
+  }
+`;
 
 function DropDownList(props) {
   const [selectValue, setSelectValue] = useState({});
@@ -12,25 +27,38 @@ function DropDownList(props) {
     props.setChildrenValue(Object.values(selectValue).join(','));
   }, [selectValue]);
   return (
-    <div>
+    <DropDownListGridColumn>
       {props.childrenValue > 0 && (
-      <div className="drop_down_list">
-        <p>What is the age of the child you’re travelling with?</p>
-        <div className="list_of_selects">
-          {props.childrenAgeOptionsList.map(
-            (select) => (
-              <select id={select.id} key={select.key} onChange={handleChange}>
-                {props.ageOptions.map(
-                  (option) => (<option key={option.value} value={option.value}>{option.label}</option>),
-                )}
-              </select>
-            ),
-          )}
-        </div>
-      </div>
+        <StyleDropDownList>
+          <DropDownListTitle>What is the age of the child you’re travelling with?</DropDownListTitle>
+          <DropDownListOfSelects>
+            {props.childrenAgeOptionsList.map(
+              (select) => (
+                <DropDownSelect id={select.id} key={select.key} onChange={handleChange}>
+                  {props.ageOptions.map(
+                    (option) => (
+                      <DropDownOption key={option.value} value={option.value}>{option.label}</DropDownOption>),
+                  )}
+                </DropDownSelect>
+              ),
+            )}
+          </DropDownListOfSelects>
+        </StyleDropDownList>
       )}
-    </div>
+    </DropDownListGridColumn>
   );
 }
 
+DropDownList.propTypes = {
+  setChildrenValue: PropTypes.func.isRequired,
+  childrenValue: PropTypes.number.isRequired,
+  childrenAgeOptionsList: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    key: PropTypes.string,
+  })),
+  ageOptions: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string,
+    value: PropTypes.string,
+  })),
+};
 export default DropDownList;

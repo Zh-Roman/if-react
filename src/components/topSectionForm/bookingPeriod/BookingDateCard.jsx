@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function BookingDateCard(props) {
   const { checkInValue, checkOutValue } = props;
@@ -9,4 +10,8 @@ function BookingDateCard(props) {
   );
 }
 
+BookingDateCard.propTypes = {
+  checkInValue: PropTypes.string,
+  checkOutValue: PropTypes.string,
+};
 export default BookingDateCard;

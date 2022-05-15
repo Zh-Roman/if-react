@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import './AppAdvertising.css';
 import { Link } from 'react-router-dom';
 import SpriteSVG from '../spriteSVG/SpriteSVG';
+import {
+  StyleAppAdvertising, AppIcon, AdvOffer, InstallButton, CloseButton,
+} from './StyleAppAdvertising';
 
 function AppAdvertising() {
   const [adv, closeAdv] = useState(true);
@@ -9,20 +11,20 @@ function AppAdvertising() {
     closeAdv(false);
   };
   return (
-    <div className={adv ? 'app_advertising _container' : 'display_none'}>
-      <div className="app_icon">
+    <StyleAppAdvertising showComponent={adv ? 'flex' : 'none'}>
+      <AppIcon>
         <SpriteSVG className="app_logo" name="logo_vector" />
-      </div>
-      <div>
-        <p className="adv_offer">Sign up in the app and get 20% off your first booking</p>
-      </div>
+      </AppIcon>
+      <AdvOffer>Sign up in the app and get 20% off your first booking</AdvOffer>
       <Link to="/">
         {' '}
-        <p className="install_button">Install</p>
+        <InstallButton>Install</InstallButton>
         {' '}
       </Link>
-      <div role="presentation" onClick={handleClick} className="close_button"><SpriteSVG className="close_button_icon" name="close_button" /></div>
-    </div>
+      <CloseButton role="presentation" onClick={handleClick}>
+        <SpriteSVG className="close_button_icon" name="close_button" />
+      </CloseButton>
+    </StyleAppAdvertising>
   );
 }
 

@@ -7,26 +7,45 @@
     list-style-type: none;
     text-decoration: none;
 }
+
 :active, :hover, :focus {
     outline: none;
 }
+
 html, body {
     height: 100%;
 }
+
 #root {
     min-height: 100%;
     overflow: hidden;
     display: flex;
     flex-direction: column;
 }
+
 .main {
     flex: 1 1 auto;
 }
+
 ._container {
-    max-width: 1232px;
-    padding: 120px 0;
+    max-width: 1264px;
+    padding: 120px 16px;
     margin: 0 auto;
 }
+
+@media screen and (max-width: 1024px) {
+    ._container {
+        padding: 80px 48px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    ._container {
+        padding: 40px 30px;
+    }
+}
+
 .display_none {
     display: none;
 }
+

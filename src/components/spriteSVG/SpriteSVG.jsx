@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Sprite from '../../assets/images/svg/sprite.svg';
 
 function SpriteSVG({ name, className }) {
@@ -8,4 +9,8 @@ function SpriteSVG({ name, className }) {
   );
 }
 
+SpriteSVG.propTypes = {
+  name: PropTypes.string.isRequired,
+  className: PropTypes.string.isRequired,
+};
 export default SpriteSVG;

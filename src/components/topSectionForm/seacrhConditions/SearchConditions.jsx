@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Transition } from 'react-transition-group';
-import './SearchConditions.css';
+import PropTypes from 'prop-types';
+import ClickAwayListener from 'react-click-away-listener';
 import ConditionValue from './conditionValue/ConditionValue';
 import ConditionFilter from './conditionFilter/ConditionFilter';
 import DropDownList from './dropDownList/DropDownList';
+import { ConditionFilters, ConditionValues, StyleSearchConditions } from './StyleSearchConditions';
 
 function SearchConditions(props) {
   const minChildrenValue = 0;
@@ -31,10 +33,11 @@ function SearchConditions(props) {
     props.setRoomsValues(roomValue);
   }, [adultsValue, roomValue]);
   return (
-    <div
-      className={`search_condition ${stateForFilter && 'color_frame'}`}
+    <StyleSearchConditions
+      stateForFilter={stateForFilter ? 'border: 3px #F5BD41 solid; margin: -3px 0 -3px -1px;' : null}
     >
-      <div role="presentation" className="condition_values" onClick={() => setStateForFilter(!stateForFilter)}>
+      {' '}
+      <ConditionValues role="presentation" onClick={() => setStateForFilter(!stateForFilter)}>
         <ConditionValue
           conditionValue={adultsValue}
           conditionTitle="Adults"
@@ -49,8 +52,7 @@ function SearchConditions(props) {
           conditionValue={roomValue}
           conditionTitle="Rooms"
         />
-      </div>
-
+      </ConditionValues>
       <Transition
         in={stateForFilter}
         timeout={500}
@@ -58,42 +60,49 @@ function SearchConditions(props) {
         unmountOnExit
       >
         {((state) => (
-          <div className={`condition_filters ${state}`}>
-            <ConditionFilter
-              minValue={minOtherValue}
-              maxValue={maxOtherValue}
-              conditionValue={adultsValue}
-              setValue={setAdultsValue}
-              filterTitle="Adults"
-            />
-            <ConditionFilter
-              minValue={minChildrenValue}
-              maxValue={maxChildrenValue}
-              conditionValue={childrenValue}
-              setValue={setChildrenValue}
-              setChildrenAgeOptionList={setChildrenAgeOptionList}
-              childrenAgeOptionsList={childrenAgeOptionsList}
-              ageOptions={ageOptions}
-              filterTitle="Children"
-            />
-            <ConditionFilter
-              minValue={minOtherValue}
-              maxValue={maxOtherValue}
-              conditionValue={roomValue}
-              setValue={setRoomValue}
-              filterTitle="Rooms"
-            />
-            <DropDownList
-              setChildrenValue={props.setChildrenValue}
-              childrenValue={childrenValue}
-              childrenAgeOptionsList={childrenAgeOptionsList}
-              ageOptions={ageOptions}
-            />
-          </div>
+          <ClickAwayListener onClickAway={() => setStateForFilter(false)}>
+            <ConditionFilters className={`${state}`}>
+              <ConditionFilter
+                minValue={minOtherValue}
+                maxValue={maxOtherValue}
+                conditionValue={adultsValue}
+                setValue={setAdultsValue}
+                filterTitle="Adults"
+              />
+              <ConditionFilter
+                minValue={minChildrenValue}
+                maxValue={maxChildrenValue}
+                conditionValue={childrenValue}
+                setValue={setChildrenValue}
+                setChildrenAgeOptionList={setChildrenAgeOptionList}
+                childrenAgeOptionsList={childrenAgeOptionsList}
+                ageOptions={ageOptions}
+                filterTitle="Children"
+              />
+              <ConditionFilter
+                minValue={minOtherValue}
+                maxValue={maxOtherValue}
+                conditionValue={roomValue}
+                setValue={setRoomValue}
+                filterTitle="Rooms"
+              />
+              <DropDownList
+                setChildrenValue={props.setChildrenValue}
+                childrenValue={childrenValue}
+                childrenAgeOptionsList={childrenAgeOptionsList}
+                ageOptions={ageOptions}
+              />
+            </ConditionFilters>
+          </ClickAwayListener>
         ))}
       </Transition>
-    </div>
+    </StyleSearchConditions>
   );
 }
 
+SearchConditions.propTypes = {
+  setAdultsValue: PropTypes.func.isRequired,
+  setRoomsValues: PropTypes.func.isRequired,
+  setChildrenValue: PropTypes.func.isRequired,
+};
 export default SearchConditions;

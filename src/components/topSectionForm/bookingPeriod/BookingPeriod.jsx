@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Transition } from 'react-transition-group';
-import './BookingPeriod.css';
+import PropTypes from 'prop-types';
+import ClickAwayListener from 'react-click-away-listener';
 import BookingDateCard from './BookingDateCard';
 import Calendar from '../topSectionCalendar/Calendar';
+import { NightStayAmount, SearchDates, StyleBookingPeriod } from './StyleBookingPeriod';
 
 const checkInValue = ['Check-in'];
 const checkOutValue = ['Check-out'];
+
 function BookingPeriod(props) {
   const [checkInDateFirstBlock, getCheckInDateFirstBlock] = useState('');
   const [checkInDateSecondBlock, getCheckInDateSecondBlock] = useState('');
@@ -61,8 +64,12 @@ function BookingPeriod(props) {
     props.setDateToValue(dateTo);
   }, [dateFromWithoutYear, dateToWithoutYear]);
   return (
-    <div className={`booking_period ${stateForCalendar && 'color_frame'}`}>
-      <div role="presentation" className="search_dates" onClick={() => setStateForCalendar(!stateForCalendar)}>
+    <StyleBookingPeriod
+      stateForCalendar={!stateForCalendar
+        ? 'border-left: 1px #3077c685 solid; border-right: 1px #3077c685 solid;'
+        : 'border: 3px #F5BD41 solid;margin: -3px 0;border-radius: 8px;'}
+    >
+      <SearchDates role="presentation" onClick={() => setStateForCalendar(!stateForCalendar)}>
         <BookingDateCard
           checkInValue={checkInValue[checkInValue.length - 1]}
         />
@@ -70,12 +77,12 @@ function BookingPeriod(props) {
         <BookingDateCard
           checkOutValue={checkOutValue[checkOutValue.length - 1]}
         />
-      </div>
+      </SearchDates>
       {checkOutValue[checkOutValue.length - 1] !== 'Check-out' && (
-        <div className="night_stay">
-          { `${nightStay(checkInValue[checkInValue.length - 1], checkOutValue[checkOutValue.length - 1])}
+        <NightStayAmount>
+          {`${nightStay(checkInValue[checkInValue.length - 1], checkOutValue[checkOutValue.length - 1])}
           - night stay`}
-        </div>
+        </NightStayAmount>
       )}
       <Transition
         in={stateForCalendar}
@@ -84,24 +91,31 @@ function BookingPeriod(props) {
         unmountOnExit
       >
         {((state) => (
-          <Calendar
-            setCurrentMonthYear={setCurrentMonthYear}
-            setNextMonthYear={setNextMonthYear}
-            setCheckOutDateBlock={setCheckOutDateBlock}
-            checkInDateFirstBlock={checkInDateFirstBlock}
-            checkInDateSecondBlock={checkInDateSecondBlock}
-            checkOutDate={checkOutDate}
-            calendarClassName={`calendar ${state}`}
-            getCheckInDateFirstBlock={getCheckInDateFirstBlock}
-            getCheckInDateSecondBlock={getCheckInDateSecondBlock}
-            getCheckOutDate={getCheckOutDate}
-            setStateForCalendar={setStateForCalendar}
-          />
+          <ClickAwayListener onClickAway={() => setStateForCalendar(false)}>
+            <div>
+              <Calendar
+                setCurrentMonthYear={setCurrentMonthYear}
+                setNextMonthYear={setNextMonthYear}
+                setCheckOutDateBlock={setCheckOutDateBlock}
+                checkInDateFirstBlock={checkInDateFirstBlock}
+                checkInDateSecondBlock={checkInDateSecondBlock}
+                checkOutDate={checkOutDate}
+                calendarClassName={`${state}`}
+                getCheckInDateFirstBlock={getCheckInDateFirstBlock}
+                getCheckInDateSecondBlock={getCheckInDateSecondBlock}
+                getCheckOutDate={getCheckOutDate}
+                setStateForCalendar={setStateForCalendar}
+              />
+            </div>
+          </ClickAwayListener>
         ))}
-
       </Transition>
-    </div>
+    </StyleBookingPeriod>
   );
 }
 
+BookingPeriod.propTypes = {
+  setDateFromValue: PropTypes.func.isRequired,
+  setDateToValue: PropTypes.func.isRequired,
+};
 export default BookingPeriod;

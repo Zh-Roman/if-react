@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import SectionTitle from '../../components/sectionTitle/SectionTitle';
 import TabMenu from '../../components/tabMenu/TabMenu';
 import SliderWithFourItems from '../../components/sectionBodySlider/SliderWithFourItems';
 import DestinationOpener from '../../components/destinationOpener/DestinationOpener';
+
+const StyleTheBestDestinations = styled.div`
+  background-color: ${(props) => props.theme.colors.primaryMain};
+`;
 
 function TheBestDestinations() {
   const [destinationSection, setDestinationSection] = useState('regions');
@@ -142,7 +147,7 @@ function TheBestDestinations() {
       },
     ],
   ];
-  const test1 = (index) => {
+  const tabMenuItem = (index) => {
     switch (destinationSection) {
       case 'regions': {
         return regions[index];
@@ -159,33 +164,36 @@ function TheBestDestinations() {
   };
 
   return (
-    <div className="_container">
-      <SectionTitle>The best destinations</SectionTitle>
-      <TabMenu setDestinationSection={setDestinationSection} />
-      <SliderWithFourItems data={test1(0)} className="reset_margin" />
-      {destinationOpener
-        || (
-        <DestinationOpener
-          name="arrow_down"
-          setDestinationOpener={setDestinationOpener}
-          destinationOpener={destinationOpener}
-        />
+    <StyleTheBestDestinations>
+      <div className="_container">
+        <SectionTitle>The best destinations</SectionTitle>
+        <TabMenu setDestinationSection={setDestinationSection} className="tab_menu" />
+        <SliderWithFourItems data={tabMenuItem(0)} resetMargin="reset_margin" />
+        {destinationOpener
+          || (
+            <DestinationOpener
+              name="arrow_down"
+              setDestinationOpener={setDestinationOpener}
+              destinationOpener={destinationOpener}
+            />
+          )}
+        {destinationOpener && (
+          <div>
+            <SliderWithFourItems
+              data={tabMenuItem(1)}
+              resetMargin="reset_margin"
+            />
+            <DestinationOpener
+              name="arrow_up"
+              setDestinationOpener={setDestinationOpener}
+              destinationOpener={destinationOpener}
+            />
+          </div>
         )}
-      {destinationOpener && (
-        <div>
-          <SliderWithFourItems
-            data={test1(1)}
-            className="reset_margin"
-          />
-          <DestinationOpener
-            name="arrow_up"
-            setDestinationOpener={setDestinationOpener}
-            destinationOpener={destinationOpener}
-          />
-        </div>
-      )}
 
-    </div>
+      </div>
+    </StyleTheBestDestinations>
+
   );
 }
 

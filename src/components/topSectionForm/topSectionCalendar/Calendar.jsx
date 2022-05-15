@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import GetCalendarMonth from './GetCalendarMonth';
-import './Calendar.css';
+import {
+  StyleCalendar,
+  ArrowForCalendarNext,
+  NameOfMonth,
+  DaysOfWeekList,
+  DaysOfWeek,
+  ArrowForCalendarBack,
+  MonthCalendar,
+  MonthTitle,
+} from './StyleCalendar';
 
 function Calendar(props) {
   const [monthCounter, setMonthCounter] = useState(0);
@@ -22,6 +32,7 @@ function Calendar(props) {
     nextMonthYear = currentMonthYear;
     nextMonth = currentMonth + 1;
   }
+
   function setDayOfWeek(year, month) {
     const theFirstDay = new Date(year, month, 1).getDay();
     let dayOfWeek;
@@ -32,6 +43,7 @@ function Calendar(props) {
     }
     return dayOfWeek;
   }
+
   const firstMonthDayOfWeek = setDayOfWeek(currentMonthYear, currentMonth);
   const nextMonthDayOfWeek = setDayOfWeek(nextMonthYear, nextMonth);
   const [backArrowCalendar, setBackArrowCalendar] = useState(false);
@@ -56,7 +68,7 @@ function Calendar(props) {
         setMonthCounter(monthCounter - 1);
         setCounter(counter - 1);
       }
-      if (counter === -1) {
+      if (counter === 0) {
         setBackArrowCalendar(false);
       }
     }
@@ -66,24 +78,24 @@ function Calendar(props) {
     props.setNextMonthYear(nextMonthYear.toString());
   }, [currentMonthYear, nextMonthYear]);
   return (
-    <div className={props.calendarClassName}>
-      <div role="presentation" className="arrow_for_calendar_next" onClick={calendarSliderNext} />
+    <StyleCalendar className={props.calendarClassName}>
+      <ArrowForCalendarNext role="presentation" onClick={calendarSliderNext} />
       {backArrowCalendar && (
-        <div role="presentation" className="arrow_for_calendar_back" onClick={calendarSliderBack} />
+        <ArrowForCalendarBack role="presentation" onClick={calendarSliderBack} />
       )}
-      <div id="firstMonth" className="monthCalendar">
-        <div className="monthTitle">
-          <div className="nameOfMonth">{`${listOfMonths[currentMonth]} ${currentMonthYear}`}</div>
-          <div className="daysOfWeek">
-            <div>Mo</div>
-            <div>Tu</div>
-            <div>We</div>
-            <div>Th</div>
-            <div>Fr</div>
-            <div>Sa</div>
-            <div>Su</div>
-          </div>
-        </div>
+      <MonthCalendar id="firstMonth">
+        <MonthTitle>
+          <NameOfMonth>{`${listOfMonths[currentMonth]} ${currentMonthYear}`}</NameOfMonth>
+          <DaysOfWeekList>
+            <DaysOfWeek>Mo</DaysOfWeek>
+            <DaysOfWeek>Tu</DaysOfWeek>
+            <DaysOfWeek>We</DaysOfWeek>
+            <DaysOfWeek>Th</DaysOfWeek>
+            <DaysOfWeek>Fr</DaysOfWeek>
+            <DaysOfWeek>Sa</DaysOfWeek>
+            <DaysOfWeek>Su</DaysOfWeek>
+          </DaysOfWeekList>
+        </MonthTitle>
         <GetCalendarMonth
           setCheckOutDateBlock={props.setCheckOutDateBlock}
           setCounter={setCounter}
@@ -98,20 +110,20 @@ function Calendar(props) {
           listOfMonths={listOfMonths}
           setStateForCalendar={props.setStateForCalendar}
         />
-      </div>
-      <div id="nextMonth" className="monthCalendar">
-        <div className="monthTitle">
-          <div className="nameOfMonth">{`${listOfMonths[nextMonth]} ${nextMonthYear}`}</div>
-          <div className="daysOfWeek">
-            <div>Mo</div>
-            <div>Tu</div>
-            <div>We</div>
-            <div>Th</div>
-            <div>Fr</div>
-            <div>Sa</div>
-            <div>Su</div>
-          </div>
-        </div>
+      </MonthCalendar>
+      <MonthCalendar id="nextMonth">
+        <MonthTitle>
+          <NameOfMonth>{`${listOfMonths[nextMonth]} ${nextMonthYear}`}</NameOfMonth>
+          <DaysOfWeekList>
+            <DaysOfWeek>Mo</DaysOfWeek>
+            <DaysOfWeek>Tu</DaysOfWeek>
+            <DaysOfWeek>We</DaysOfWeek>
+            <DaysOfWeek>Th</DaysOfWeek>
+            <DaysOfWeek>Fr</DaysOfWeek>
+            <DaysOfWeek>Sa</DaysOfWeek>
+            <DaysOfWeek>Su</DaysOfWeek>
+          </DaysOfWeekList>
+        </MonthTitle>
         <GetCalendarMonth
           setCheckOutDateBlock={props.setCheckOutDateBlock}
           setCounter={setCounter}
@@ -126,9 +138,22 @@ function Calendar(props) {
           listOfMonths={listOfMonths}
           setStateForCalendar={props.setStateForCalendar}
         />
-      </div>
-    </div>
+      </MonthCalendar>
+    </StyleCalendar>
   );
 }
 
+Calendar.propTypes = {
+  setCurrentMonthYear: PropTypes.func.isRequired,
+  setNextMonthYear: PropTypes.func.isRequired,
+  calendarClassName: PropTypes.string,
+  checkInDateSecondBlock: PropTypes.string.isRequired,
+  checkInDateFirstBlock: PropTypes.string.isRequired,
+  setCheckOutDateBlock: PropTypes.func.isRequired,
+  getCheckInDateFirstBlock: PropTypes.func.isRequired,
+  getCheckInDateSecondBlock: PropTypes.func.isRequired,
+  getCheckOutDate: PropTypes.func.isRequired,
+  setStateForCalendar: PropTypes.func.isRequired,
+
+};
 export default Calendar;

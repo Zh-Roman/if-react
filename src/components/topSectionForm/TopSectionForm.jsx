@@ -1,18 +1,11 @@
 import React, { useState } from 'react';
-import './TopSectionForm.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import SearchDestinationInput from './searchDestinationInput/SearchDestinationInput';
 import TopSectionFormButton from './topSectionFormButton/TopSectionFormButton';
 import BookingPeriod from './bookingPeriod/BookingPeriod';
 import SearchConditions from './seacrhConditions/SearchConditions';
 import { getUserQueryRequested } from '../../ducks/userQuery/actions';
-import {
-  adultsValueSelector,
-  childrenValueSelector, dateFromValueSelector, dateToValueSelector, roomsValueSelector,
-  searchValueSelector,
-} from '../../ducks/queryUrlComponents/selectors';
-
-const basicUrlForSearch = 'https://fe-student-api.herokuapp.com/api/hotels';
+import StyleTopSectionForm from './StyleTopSectionForm';
 
 function TopSectionForm() {
   const [valueForSubmit, setValueForSubmit] = useState('');
@@ -21,23 +14,15 @@ function TopSectionForm() {
   const [roomsValue, setRoomsValues] = useState('');
   const [dateFromValue, setDateFromValue] = useState('');
   const [dateToValue, setDateToValue] = useState('');
-  const searchValueUrl = useSelector(searchValueSelector);
-  const adultsValueUrl = useSelector(adultsValueSelector);
-  const childrenValueUrl = useSelector(childrenValueSelector);
-  const roomsValueUrl = useSelector(roomsValueSelector);
-  const dateFromValueUrl = useSelector(dateFromValueSelector);
-  const dateToValueUrl = useSelector(dateToValueSelector);
-  const urlForRequest = `${basicUrlForSearch}?search=${searchValueUrl}&dateFrom=${dateFromValueUrl}&dateTo=${dateToValueUrl}&adults=${adultsValueUrl}&children=${childrenValueUrl}&rooms=${roomsValueUrl}`;
   const dispatch = useDispatch();
   return (
-    <form
-      className="top_section_form"
+    <StyleTopSectionForm
       action="#"
       method="get"
       autoComplete="off"
       onSubmit={(event) => {
         event.preventDefault();
-        dispatch(getUserQueryRequested(urlForRequest));
+        dispatch(getUserQueryRequested());
       }}
     >
       <SearchDestinationInput
@@ -60,7 +45,8 @@ function TopSectionForm() {
         dateFromValue={dateFromValue}
         dateToValue={dateToValue}
       />
-    </form>
+    </StyleTopSectionForm>
   );
 }
+
 export default TopSectionForm;

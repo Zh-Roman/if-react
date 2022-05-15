@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './GetCalendarMonth.css';
+import PropTypes from 'prop-types';
+import { MonthBodyItem, StyleGetCalendarMonth } from './StyleGetCalendarMonth';
 
 function GetCalendarMonth(props) {
   const daysInWeek = 7;
@@ -139,15 +140,15 @@ function GetCalendarMonth(props) {
     };
   };
   return (
-    <ul className="monthBody">
+    <StyleGetCalendarMonth>
       {arrayOfObj.map((day) => (
-        <li
+        <MonthBodyItem
           role="presentation"
           value={day.dayOfMonth}
           key={day.key}
           id={day.key}
           onClick={handleClick}
-          className={`
+          className={`monthBody 
           ${day.currentMonth} 
           ${day.currentDay} 
           ${day.previousDays} 
@@ -157,10 +158,26 @@ function GetCalendarMonth(props) {
           `}
         >
           {day.dayOfMonth}
-        </li>
+        </MonthBodyItem>
       ))}
-    </ul>
+    </StyleGetCalendarMonth>
   );
 }
 
+GetCalendarMonth.propTypes = {
+  listOfDays: PropTypes.arrayOf(PropTypes.number).isRequired,
+  month: PropTypes.number.isRequired,
+  dayOfWeek: PropTypes.number.isRequired,
+  listOfMonths: PropTypes.arrayOf(PropTypes.string).isRequired,
+  getCheckOutDate: PropTypes.func.isRequired,
+  setCheckOutDateBlock: PropTypes.func.isRequired,
+  block: PropTypes.string.isRequired,
+  getCheckInDateFirstBlock: PropTypes.func.isRequired,
+  setStateForCalendar: PropTypes.func.isRequired,
+  setCounter: PropTypes.func.isRequired,
+  checkInDateSecondBlock: PropTypes.string,
+  getCheckInDateSecondBlock: PropTypes.func.isRequired,
+  checkInDateFromTheFirstBlock: PropTypes.string,
+
+};
 export default GetCalendarMonth;

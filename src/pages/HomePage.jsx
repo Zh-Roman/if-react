@@ -13,6 +13,7 @@ import Loading from '../components/loadingProcess/Loading';
 import { getUserQueryFailed } from '../ducks/userQuery/actions';
 
 function HomePage() {
+  const needScroll = true;
   const [loaderRef, setLoaderRef] = useState(null);
   const [topScreenRef, setTopScreenRef] = useState(null);
   const navigateToErrorPage = useNavigate();
@@ -37,7 +38,7 @@ function HomePage() {
   return (
     <div>
       <TopSection queryError={queryError} setRef={setTopScreenRef} />
-      <Loading loading={loading} setRef={setLoaderRef} />
+      <Loading loading={loading} setRef={setLoaderRef} needScroll={needScroll} />
       {dataFromSearchRequest
         && (
           <AvailableHotels

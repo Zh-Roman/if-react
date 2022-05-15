@@ -1,6 +1,18 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './ItemForSlider.css';
+import './SliderStyle.css';
+import PropTypes from 'prop-types';
+import {
+  StyleItemForSlider,
+  PlaceName,
+  PlaceLocation,
+  SectionImageBox,
+  ContentImg,
+  HoverEffect,
+  ReservationShadow,
+  BookingButton,
+  BookingButtonLink,
+} from './StyleItemForSlider';
 
 function ItemForSlider(props) {
   const navigate = useNavigate();
@@ -10,35 +22,47 @@ function ItemForSlider(props) {
     }
   };
   return (
-    <div
+    <StyleItemForSlider
       role="presentation"
-      className={props.needNavigate === true ? 'sectionBodyItem hover_frame' : 'sectionBodyItem'}
       onClick={navigateToPage}
     >
       <div>
-        <div className="section_image_box">
-          <img className="content__img" src={props.item.imageUrl} alt={props.item.name} />
+        <SectionImageBox>
+          <ContentImg src={props.item.imageUrl} alt={props.item.name} />
           {props.item.country === undefined && (
-            <div className="hover_effect">
-              <div className="reservation__shadow" />
-              <div className="reservation__booking booking_button">
-                <a href="/">Book now</a>
-              </div>
-            </div>
+            <HoverEffect>
+              <ReservationShadow />
+              <BookingButton>
+                <BookingButtonLink href="/">Book now</BookingButtonLink>
+              </BookingButton>
+            </HoverEffect>
           )}
-        </div>
-        <p className="place-name">{props.item.name}</p>
+        </SectionImageBox>
+        <PlaceName>{props.item.name}</PlaceName>
         {props.item.country !== undefined && (
-        <p className="place-location">
-          {props.item.city}
-          ,
-          {' '}
-          {props.item.country}
-        </p>
+          <PlaceLocation>
+            {props.item.city}
+            ,
+            {' '}
+            {props.item.country}
+          </PlaceLocation>
         )}
       </div>
-    </div>
+    </StyleItemForSlider>
   );
 }
 
+ItemForSlider.propTypes = {
+  needNavigate: PropTypes.bool,
+
+};
+ItemForSlider.propTypes = {
+  item: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    imageUrl: PropTypes.string,
+    name: PropTypes.string,
+    city: PropTypes.string,
+    country: PropTypes.string,
+  }),
+};
 export default ItemForSlider;
