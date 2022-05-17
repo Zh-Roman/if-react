@@ -2,16 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function BookingDateCard(props) {
-  const { checkInValue, checkOutValue } = props;
+  const { bookingDate } = props;
   return (
     <div>
-      {checkInValue || checkOutValue}
+      {bookingDate}
     </div>
   );
 }
 
 BookingDateCard.propTypes = {
-  checkInValue: PropTypes.string,
-  checkOutValue: PropTypes.string,
+  bookingDate: PropTypes.string,
 };
 export default BookingDateCard;

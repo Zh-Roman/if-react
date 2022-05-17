@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import GetCalendarMonth from './GetCalendarMonth';
 import {
@@ -73,10 +73,6 @@ function Calendar(props) {
       }
     }
   };
-  useEffect(() => {
-    props.setCurrentMonthYear(currentMonthYear.toString());
-    props.setNextMonthYear(nextMonthYear.toString());
-  }, [currentMonthYear, nextMonthYear]);
   return (
     <StyleCalendar className={props.calendarClassName}>
       <ArrowForCalendarNext role="presentation" onClick={calendarSliderNext} />
@@ -97,14 +93,8 @@ function Calendar(props) {
           </DaysOfWeekList>
         </MonthTitle>
         <GetCalendarMonth
-          setCheckOutDateBlock={props.setCheckOutDateBlock}
-          setCounter={setCounter}
-          getCheckInDateFirstBlock={props.getCheckInDateFirstBlock}
-          getCheckInDateSecondBlock={props.getCheckInDateSecondBlock}
-          checkInDateSecondBlock={props.checkInDateSecondBlock}
-          getCheckOutDate={props.getCheckOutDate}
-          block="first"
           month={currentMonth}
+          year={currentMonthYear}
           dayOfWeek={firstMonthDayOfWeek}
           listOfDays={listOfDays}
           listOfMonths={listOfMonths}
@@ -125,14 +115,8 @@ function Calendar(props) {
           </DaysOfWeekList>
         </MonthTitle>
         <GetCalendarMonth
-          setCheckOutDateBlock={props.setCheckOutDateBlock}
-          setCounter={setCounter}
-          checkInDateFromTheFirstBlock={props.checkInDateFirstBlock}
-          getCheckInDateFirstBlock={props.getCheckInDateFirstBlock}
-          getCheckInDateSecondBlock={props.getCheckInDateSecondBlock}
-          getCheckOutDate={props.getCheckOutDate}
-          block="second"
           month={nextMonth}
+          year={nextMonthYear}
           dayOfWeek={nextMonthDayOfWeek}
           listOfDays={listOfDays}
           listOfMonths={listOfMonths}
@@ -144,16 +128,7 @@ function Calendar(props) {
 }
 
 Calendar.propTypes = {
-  setCurrentMonthYear: PropTypes.func.isRequired,
-  setNextMonthYear: PropTypes.func.isRequired,
   calendarClassName: PropTypes.string,
-  checkInDateSecondBlock: PropTypes.string.isRequired,
-  checkInDateFirstBlock: PropTypes.string.isRequired,
-  setCheckOutDateBlock: PropTypes.func.isRequired,
-  getCheckInDateFirstBlock: PropTypes.func.isRequired,
-  getCheckInDateSecondBlock: PropTypes.func.isRequired,
-  getCheckOutDate: PropTypes.func.isRequired,
   setStateForCalendar: PropTypes.func.isRequired,
-
 };
 export default Calendar;

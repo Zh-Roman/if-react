@@ -17,14 +17,14 @@ export const StyleGetCalendarMonth = styled.ul`
     color: ${(props) => props.theme.colors.primaryText};
   }
 
-  .currentDayTrue {
+  .current_day {
     color: ${(props) => props.theme.colors.primaryAccent};
     background-color: ${(props) => props.theme.colors.secondaryMain};
     border-radius: 8px;
     border: 1px ${(props) => props.theme.colors.primaryAccent} solid;
   }
 
-  .currentMonthPreviousDaysTrue {
+  .current_month_previous_days {
     color: ${(props) => props.theme.colors.secondaryText};
   }
 
@@ -33,26 +33,22 @@ export const StyleGetCalendarMonth = styled.ul`
     background-color: ${(props) => props.theme.colors.primaryMain};
   }
 
-  .checkInDay {
+  .check_in_day {
     background-color: ${(props) => props.theme.colors.primaryAccent};
     color: ${(props) => props.theme.colors.primaryMain};
     border-radius: 0;
   }
 
-  .checkInDay ~ li {
+  .days_after_check_in_day {
     background-color: ${(props) => props.theme.colors.secondaryMain};
   }
 
-  .monthBody.checkOutDay {
+  .check_out_day {
     background-color: ${(props) => props.theme.colors.secondaryText};
     color: ${(props) => props.theme.colors.primaryMain};
   }
 
-  .firstDayOfMonth, .firstDayOfMonth ~ li {
-    background-color: ${(props) => props.theme.colors.secondaryMain};
-  }
-
-  .checkOutDay ~ li {
+  .days_after_check_out_day {
     background-color: ${(props) => props.theme.colors.primaryMain};
   }
 `;

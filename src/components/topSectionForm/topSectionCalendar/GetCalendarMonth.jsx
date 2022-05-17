@@ -1,163 +1,101 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { MonthBodyItem, StyleGetCalendarMonth } from './StyleGetCalendarMonth';
+import FormContext from '../../../context/TopSectionFormContext';
 
 function GetCalendarMonth(props) {
+  const currentDayGetTime = new Date(
+    `${new Date().getDate()} ${props.listOfMonths[new Date().getMonth()]} ${new Date().getFullYear()}`,
+  ).getTime();
   const daysInWeek = 7;
   let daysInMonth = props.listOfDays[props.month];
   const arrayOfNumbers = [];
   let notThisMonthStart = 0;
   let notThisMonthEnd = 0;
   for (let i = 1; i <= daysInMonth; i += 1) {
-    arrayOfNumbers.push(i);
+    arrayOfNumbers.push({
+      day: i,
+      month: props.listOfMonths[props.month],
+      year: props.year,
+
+    });
   }
   let previousMonthDays = props.listOfDays[props.month - 1];
   if (props.month === 0) {
     previousMonthDays = 31;
   }
-  for (let day = previousMonthDays, i = 0; i < props.dayOfWeek; i += 1, day -= 1, daysInMonth += 1) {
-    arrayOfNumbers.unshift(day);
+  for (let prevDays = previousMonthDays, i = 0; i < props.dayOfWeek; i += 1, prevDays -= 1, daysInMonth += 1) {
+    arrayOfNumbers.unshift({ day: prevDays });
     notThisMonthStart = i;
   }
-  for (let day = 1, i = 0; daysInMonth % daysInWeek !== 0; day += 1, daysInMonth += 1, i += 1) {
-    arrayOfNumbers.push(day);
-    notThisMonthEnd = day;
+  for (let nextDays = 1, i = 0; daysInMonth % daysInWeek !== 0; nextDays += 1, daysInMonth += 1, i += 1) {
+    arrayOfNumbers.push({ day: nextDays });
+    notThisMonthEnd = nextDays;
   }
   const keys = [];
   for (let i = 1; i <= arrayOfNumbers.length; i += 1) {
     keys.push(i);
   }
-  const arrayOfObj = arrayOfNumbers.map((dayOfMonth) => ({ dayOfMonth }));
+  const arrayOfObj = arrayOfNumbers.map((date) => ({ date }));
   const keysForObject = keys.map((key) => ({ key }));
   for (let i = 0; i < arrayOfObj.length; i += 1) {
     Object.assign(arrayOfObj[i], keysForObject[i]);
   }
-  let currentDayKey;
   for (let i = 0; i < arrayOfNumbers.length; i += 1, notThisMonthStart -= 1) {
     if (notThisMonthStart >= 0 || i >= arrayOfNumbers.length - notThisMonthEnd) {
       arrayOfObj[i].currentMonth = 'currentMonthFalse';
-    } else {
-      arrayOfObj[i].currentMonth = 'currentMonthTrue';
-    }
-    if (props.month === new Date().getMonth()) {
-      if (arrayOfObj[i].dayOfMonth === new Date().getDate() && arrayOfObj[i].currentMonth === 'currentMonthTrue') {
-        arrayOfObj[i].currentDay = 'currentDayTrue';
-        currentDayKey = arrayOfObj[i].key;
-      } else {
-        arrayOfObj[i].currentDay = 'currentDayFalse';
-      }
-      if (arrayOfObj[i].dayOfMonth < new Date().getDate() && arrayOfObj[i].currentMonth === 'currentMonthTrue') {
-        arrayOfObj[i].previousDays = 'currentMonthPreviousDaysTrue';
-      } else {
-        arrayOfObj[i].previousDays = 'currentMonthPreviousDaysFalse';
-      }
     }
   }
-  if (arrayOfObj[0].dayOfMonth === 1) {
-    delete arrayOfObj[0].currentMonth;
-  }
-  const [checkingPeriod, setCheckingPeriod] = useState({
-    checkInDate: '',
-    checkOutDate: '',
-  });
-
+  const {
+    dateFromValue,
+    setDateFromValue,
+    dateToValue,
+    setDateToValue,
+  } = useContext(FormContext);
   const handleClick = (e) => {
-    const { id, value, className } = e.currentTarget;
-    const getCheckingPeriod = (setCheckInDate) => {
-      if (checkingPeriod.checkInDate !== '' && checkingPeriod.checkOutDate !== '') {
-        checkingPeriod.checkInDate = '';
-        checkingPeriod.checkOutDate = '';
+    const { id, className } = e.currentTarget;
+    if (!className.includes('currentMonthFalse') && new Date(id).getTime() >= currentDayGetTime) {
+      if (dateFromValue !== 'Check-in' && dateToValue !== 'Check-out') {
+        setDateFromValue(id);
+        setDateToValue('Check-out');
       }
-      if (checkingPeriod.checkInDate === '') {
-        setCheckInDate(`${value} ${props.listOfMonths[props.month]}`);
-        setCheckingPeriod({
-          checkInDate: id,
-          checkOutDate: '',
-        });
+      if (dateFromValue === 'Check-in') {
+        setDateFromValue(id);
       }
-      if (checkingPeriod.checkInDate !== '') {
-        if (Number(id) > Number(checkingPeriod.checkInDate)) {
-          props.getCheckOutDate(`${e.currentTarget.value} ${props.listOfMonths[props.month]}`);
-          props.setCheckOutDateBlock(props.block);
-          props.getCheckInDateFirstBlock('');
-          setTimeout(props.setStateForCalendar(false), 500);
-          props.setCounter(-1);
-        }
-        setCheckingPeriod({
-          checkInDate: checkingPeriod.checkInDate,
-          checkOutDate: id,
-        });
-      }
-    };
-    if (!(className.includes('currentMonthFalse') || className.includes('currentMonthPreviousDaysTrue'))) {
-      if (props.block === 'first') {
-        getCheckingPeriod(props.getCheckInDateFirstBlock);
-        if (props.checkInDateSecondBlock !== '') {
-          props.getCheckInDateFirstBlock(`${e.currentTarget.value} ${props.listOfMonths[props.month]}`);
-          props.getCheckInDateSecondBlock('');
-        }
-      } else if (props.checkInDateFromTheFirstBlock === '') {
-        getCheckingPeriod(props.getCheckInDateSecondBlock);
-      } else {
-        props.getCheckOutDate(`${e.currentTarget.value} ${props.listOfMonths[props.month]}`);
-        props.setCheckOutDateBlock(props.block);
-        props.getCheckInDateFirstBlock('');
-        setTimeout(props.setStateForCalendar(false), 500);
-        props.setCounter(-1);
-        setCheckingPeriod({
-          checkInDate: checkingPeriod.checkInDate,
-          checkOutDate: id,
-        });
+      if (dateFromValue !== 'Check-in'
+        && dateToValue === 'Check-out'
+        && new Date(id).getTime() > new Date(dateFromValue).getTime()) {
+        setDateToValue(id);
+        setTimeout(props.setStateForCalendar(false), 1000);
       }
     }
-  };
-  const checkingState = (arrayItem) => {
-    let checkInDay = '';
-    let checkOutDay = '';
-    let firstDayOfMonth = '';
-    if (arrayItem.key.toString() === checkingPeriod.checkInDate && checkInDay === '') {
-      if (arrayItem.key >= currentDayKey) {
-        checkInDay = 'checkInDay';
-      } else if (currentDayKey === undefined) {
-        checkInDay = 'checkInDay';
-      }
-      if (props.block === 'second') {
-        checkInDay = 'checkInDay';
-      }
-    }
-    if (arrayItem.key.toString() === checkingPeriod.checkOutDate
-      && Number(checkingPeriod.checkOutDate) > Number(checkingPeriod.checkInDate)) {
-      checkOutDay = 'checkOutDay';
-    }
-    if (props.block === 'second' && arrayItem.dayOfMonth === 1
-      && checkingPeriod.checkOutDate !== '' && checkingPeriod.checkInDate === '') {
-      firstDayOfMonth = 'firstDayOfMonth';
-    }
-    return {
-      checkInDay,
-      checkOutDay,
-      firstDayOfMonth,
-    };
   };
   return (
     <StyleGetCalendarMonth>
-      {arrayOfObj.map((day) => (
+      {arrayOfObj.map((item) => (
         <MonthBodyItem
           role="presentation"
-          value={day.dayOfMonth}
-          key={day.key}
-          id={day.key}
+          value={item.date.day}
+          key={item.key}
+          id={`${item.date.day} ${item.date.month} ${item.date.year}`}
           onClick={handleClick}
-          className={`monthBody 
-          ${day.currentMonth} 
-          ${day.currentDay} 
-          ${day.previousDays} 
-          ${checkingState(day).checkInDay}
-          ${checkingState(day).checkOutDay}
-          ${checkingState(day).firstDayOfMonth}
+          className={`
+          ${item.currentMonth}
+          ${new Date(Object.values(item.date).join(' ')).getTime() === currentDayGetTime
+            ? 'current_day' : null}
+          ${new Date(Object.values(item.date).join(' ')).getTime() < currentDayGetTime
+              ? 'current_month_previous_days' : null}
+          ${new Date(Object.values(item.date).join(' ')).getTime() === new Date(dateFromValue).getTime()
+                ? 'check_in_day' : null}
+          ${new Date(Object.values(item.date).join(' ')).getTime() > new Date(dateFromValue).getTime()
+                  ? 'days_after_check_in_day' : null}
+          ${new Date(Object.values(item.date).join(' ')).getTime() === new Date(dateToValue).getTime()
+                    ? 'check_out_day' : null}
+          ${new Date(Object.values(item.date).join(' ')).getTime() > new Date(dateToValue).getTime()
+                      ? 'days_after_check_out_day' : null}
           `}
         >
-          {day.dayOfMonth}
+          {item.date.day}
         </MonthBodyItem>
       ))}
     </StyleGetCalendarMonth>
@@ -167,17 +105,9 @@ function GetCalendarMonth(props) {
 GetCalendarMonth.propTypes = {
   listOfDays: PropTypes.arrayOf(PropTypes.number).isRequired,
   month: PropTypes.number.isRequired,
+  year: PropTypes.number.isRequired,
   dayOfWeek: PropTypes.number.isRequired,
   listOfMonths: PropTypes.arrayOf(PropTypes.string).isRequired,
-  getCheckOutDate: PropTypes.func.isRequired,
-  setCheckOutDateBlock: PropTypes.func.isRequired,
-  block: PropTypes.string.isRequired,
-  getCheckInDateFirstBlock: PropTypes.func.isRequired,
   setStateForCalendar: PropTypes.func.isRequired,
-  setCounter: PropTypes.func.isRequired,
-  checkInDateSecondBlock: PropTypes.string,
-  getCheckInDateSecondBlock: PropTypes.func.isRequired,
-  checkInDateFromTheFirstBlock: PropTypes.string,
-
 };
 export default GetCalendarMonth;

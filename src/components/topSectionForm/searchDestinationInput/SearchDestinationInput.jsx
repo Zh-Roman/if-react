@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import FormContext from '../../../context/TopSectionFormContext';
 
 const StyleSearchDestinationInput = styled.input`
   flex-grow: 1;
@@ -21,26 +21,22 @@ const StyleSearchDestinationInput = styled.input`
   }
 `;
 
-function SearchDestinationInput(props) {
-  const [valueFromInput, setValue] = useState('');
-  const handleChange = (e) => {
-    setValue(e.target.value);
-    props.setValueForSubmit(e.target.value);
+function SearchDestinationInput() {
+  const { setSearchRequestValue, searchRequestValue } = useContext(FormContext);
+  const handleInputChange = (e) => {
+    setSearchRequestValue(e.target.value);
   };
 
   return (
     <StyleSearchDestinationInput
       className="search_destination_input"
       type="text"
-      value={valueFromInput}
-      onChange={handleChange}
+      value={searchRequestValue}
+      onChange={handleInputChange}
       placeholder="Your destination or hotel name"
       required
     />
   );
 }
 
-SearchDestinationInput.propTypes = {
-  setValueForSubmit: PropTypes.func.isRequired,
-};
 export default SearchDestinationInput;

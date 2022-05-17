@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import SearchDestinationInput from './searchDestinationInput/SearchDestinationInput';
 import TopSectionFormButton from './topSectionFormButton/TopSectionFormButton';
@@ -8,12 +8,6 @@ import { getUserQueryRequested } from '../../ducks/userQuery/actions';
 import StyleTopSectionForm from './StyleTopSectionForm';
 
 function TopSectionForm() {
-  const [valueForSubmit, setValueForSubmit] = useState('');
-  const [adultsValue, setAdultsValue] = useState('');
-  const [childrenValue, setChildrenValue] = useState('');
-  const [roomsValue, setRoomsValues] = useState('');
-  const [dateFromValue, setDateFromValue] = useState('');
-  const [dateToValue, setDateToValue] = useState('');
   const dispatch = useDispatch();
   return (
     <StyleTopSectionForm
@@ -25,26 +19,10 @@ function TopSectionForm() {
         dispatch(getUserQueryRequested());
       }}
     >
-      <SearchDestinationInput
-        setValueForSubmit={setValueForSubmit}
-      />
-      <BookingPeriod
-        setDateFromValue={setDateFromValue}
-        setDateToValue={setDateToValue}
-      />
-      <SearchConditions
-        setAdultsValue={setAdultsValue}
-        setChildrenValue={setChildrenValue}
-        setRoomsValues={setRoomsValues}
-      />
-      <TopSectionFormButton
-        searchValue={valueForSubmit}
-        adultsValue={adultsValue}
-        childrenValue={childrenValue}
-        roomsValue={roomsValue}
-        dateFromValue={dateFromValue}
-        dateToValue={dateToValue}
-      />
+      <SearchDestinationInput />
+      <BookingPeriod />
+      <SearchConditions />
+      <TopSectionFormButton />
     </StyleTopSectionForm>
   );
 }
