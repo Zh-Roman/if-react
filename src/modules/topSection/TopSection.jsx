@@ -5,6 +5,7 @@ import TopSectionTitle from '../../components/topSectionTitle/TopSectionTitle';
 import TopSectionForm from '../../components/topSectionForm/TopSectionForm';
 import TopSectionApps from '../../components/topSectionApps/TopSectionApps';
 import mainBackground from '../../assets/images/topSectionBackground/background_picture.jpg';
+import { FormProviderContext } from '../../context/TopSectionFormContext';
 
 const StyleTopSection = styled.section`
   min-height: 100vh;
@@ -32,7 +33,9 @@ function TopSection(props) {
           <br />
           to live, work or just relax
         </TopSectionTitle>
-        <TopSectionForm />
+        <FormProviderContext>
+          <TopSectionForm />
+        </FormProviderContext>
         <TopSectionApps />
       </TopSectionContainer>
     </StyleTopSection>

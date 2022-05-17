@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Transition } from 'react-transition-group';
-import PropTypes from 'prop-types';
 import ClickAwayListener from 'react-click-away-listener';
+import FormContext from '../../../context/TopSectionFormContext';
 import ConditionValue from './conditionValue/ConditionValue';
 import ConditionFilter from './conditionFilter/ConditionFilter';
 import DropDownList from './dropDownList/DropDownList';
 import { ConditionFilters, ConditionValues, StyleSearchConditions } from './StyleSearchConditions';
 
-function SearchConditions(props) {
-  const minChildrenValue = 0;
-  const minOtherValue = 1;
+function SearchConditions() {
+  const minChildrenValueForRequest = 0;
+  const minOtherValueForRequest = 1;
   const maxChildrenValue = 10;
   const maxOtherValue = 30;
   const ageOptions = [{
@@ -23,15 +23,11 @@ function SearchConditions(props) {
     };
     ageOptions.push(option);
   }
-  const [adultsValue, setAdultsValue] = useState(1);
-  const [childrenValue, setChildrenValue] = useState(minChildrenValue);
   const [childrenAgeOptionsList, setChildrenAgeOptionList] = useState([]);
-  const [roomValue, setRoomValue] = useState(minOtherValue);
   const [stateForFilter, setStateForFilter] = useState(false);
-  useEffect(() => {
-    props.setAdultsValue(adultsValue);
-    props.setRoomsValues(roomValue);
-  }, [adultsValue, roomValue]);
+  const {
+    adultsValue, setAdultsValue, setChildrenValue, childrenValue, roomsValue, setRoomsValues,
+  } = useContext(FormContext);
   return (
     <StyleSearchConditions
       stateForFilter={stateForFilter ? 'border: 3px #F5BD41 solid; margin: -3px 0 -3px -1px;' : null}
@@ -40,17 +36,17 @@ function SearchConditions(props) {
       <ConditionValues role="presentation" onClick={() => setStateForFilter(!stateForFilter)}>
         <ConditionValue
           conditionValue={adultsValue}
-          conditionTitle="Adults"
+          conditionTitle={adultsValue === 1 ? 'Adult' : 'Adults'}
         />
         <span>&nbsp;—&nbsp;</span>
         <ConditionValue
           conditionValue={childrenValue}
-          conditionTitle="Children"
+          conditionTitle={childrenValue === 1 ? 'Child' : 'Children'}
         />
         <span>&nbsp;—&nbsp;</span>
         <ConditionValue
-          conditionValue={roomValue}
-          conditionTitle="Rooms"
+          conditionValue={roomsValue}
+          conditionTitle={roomsValue === 1 ? 'Room' : 'Rooms'}
         />
       </ConditionValues>
       <Transition
@@ -63,32 +59,30 @@ function SearchConditions(props) {
           <ClickAwayListener onClickAway={() => setStateForFilter(false)}>
             <ConditionFilters className={`${state}`}>
               <ConditionFilter
-                minValue={minOtherValue}
+                minValue={minOtherValueForRequest}
                 maxValue={maxOtherValue}
                 conditionValue={adultsValue}
                 setValue={setAdultsValue}
-                filterTitle="Adults"
+                filterTitle={adultsValue === 1 ? 'Adult' : 'Adults'}
               />
               <ConditionFilter
-                minValue={minChildrenValue}
+                minValue={minChildrenValueForRequest}
                 maxValue={maxChildrenValue}
                 conditionValue={childrenValue}
                 setValue={setChildrenValue}
                 setChildrenAgeOptionList={setChildrenAgeOptionList}
                 childrenAgeOptionsList={childrenAgeOptionsList}
                 ageOptions={ageOptions}
-                filterTitle="Children"
+                filterTitle={childrenValue === 1 ? 'Child' : 'Children'}
               />
               <ConditionFilter
-                minValue={minOtherValue}
+                minValue={minOtherValueForRequest}
                 maxValue={maxOtherValue}
-                conditionValue={roomValue}
-                setValue={setRoomValue}
-                filterTitle="Rooms"
+                conditionValue={roomsValue}
+                setValue={setRoomsValues}
+                filterTitle={roomsValue === 1 ? 'Room' : 'Rooms'}
               />
               <DropDownList
-                setChildrenValue={props.setChildrenValue}
-                childrenValue={childrenValue}
                 childrenAgeOptionsList={childrenAgeOptionsList}
                 ageOptions={ageOptions}
               />
@@ -100,9 +94,4 @@ function SearchConditions(props) {
   );
 }
 
-SearchConditions.propTypes = {
-  setAdultsValue: PropTypes.func.isRequired,
-  setRoomsValues: PropTypes.func.isRequired,
-  setChildrenValue: PropTypes.func.isRequired,
-};
 export default SearchConditions;

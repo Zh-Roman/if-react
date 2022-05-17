@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {
@@ -8,6 +8,7 @@ import {
   DropDownSelect,
   StyleDropDownList,
 } from './StyleDropDownList';
+import FormContext from '../../../../context/TopSectionFormContext';
 
 const DropDownListGridColumn = styled.div`
   @media screen and (min-width: 768px) {
@@ -18,17 +19,20 @@ const DropDownListGridColumn = styled.div`
 
 function DropDownList(props) {
   const [selectValue, setSelectValue] = useState({});
+  const {
+    childrenValue, setChildrenAgeValue,
+  } = useContext(FormContext);
   const handleChange = (e) => {
     if (e.target.value !== 'Indicate age') {
       setSelectValue({ ...selectValue, [e.target.id]: e.target.value });
     }
   };
   useEffect(() => {
-    props.setChildrenValue(Object.values(selectValue).join(','));
+    setChildrenAgeValue(Object.values(selectValue).join(','));
   }, [selectValue]);
   return (
     <DropDownListGridColumn>
-      {props.childrenValue > 0 && (
+      {childrenValue > 0 && (
         <StyleDropDownList>
           <DropDownListTitle>What is the age of the child you’re travelling with?</DropDownListTitle>
           <DropDownListOfSelects>
@@ -50,8 +54,6 @@ function DropDownList(props) {
 }
 
 DropDownList.propTypes = {
-  setChildrenValue: PropTypes.func.isRequired,
-  childrenValue: PropTypes.number.isRequired,
   childrenAgeOptionsList: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     key: PropTypes.string,

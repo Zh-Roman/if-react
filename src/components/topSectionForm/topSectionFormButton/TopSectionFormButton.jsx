@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import {
   getAdultsValue,
   getChildrenValue, getDateFromValue, getDateToValue,
   getRoomsValue,
   getSearchValue,
 } from '../../../ducks/queryUrlComponents/actions';
+import FormContext from '../../../context/TopSectionFormContext';
 
 export const StyleTopSectionFormButton = styled.button`
   height: 64px;
@@ -33,33 +33,28 @@ export const StyleTopSectionFormButton = styled.button`
   }
 `;
 
-function TopSectionFormButton(props) {
+function TopSectionFormButton() {
+  const {
+    searchRequestValue, adultsValue, childrenAgeValue, roomsValue, dateFromValue, dateToValue,
+  } = useContext(FormContext);
+
   const dispatch = useDispatch();
-  const handleClick = () => {
-    dispatch(getSearchValue(props.searchValue));
-    dispatch(getAdultsValue(props.adultsValue));
-    dispatch(getChildrenValue(props.childrenValue));
-    dispatch(getRoomsValue(props.roomsValue));
-    dispatch(getDateFromValue(props.dateFromValue));
-    dispatch(getDateToValue(props.dateToValue));
+  const handleSubmitClick = () => {
+    dispatch(getSearchValue(searchRequestValue));
+    dispatch(getAdultsValue(adultsValue));
+    dispatch(getChildrenValue(childrenAgeValue));
+    dispatch(getRoomsValue(roomsValue));
+    dispatch(getDateFromValue(new Date(dateFromValue).getTime()));
+    dispatch(getDateToValue(new Date(dateToValue).getTime()));
   };
   return (
     <StyleTopSectionFormButton
       className="top_section_button"
       type="submit"
-      onClick={handleClick}
+      onClick={handleSubmitClick}
     >
       Search
     </StyleTopSectionFormButton>
   );
 }
-
-TopSectionFormButton.propTypes = {
-  searchValue: PropTypes.string.isRequired,
-  adultsValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  childrenValue: PropTypes.string.isRequired,
-  roomsValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  dateFromValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  dateToValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-};
 export default TopSectionFormButton;
