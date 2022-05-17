@@ -13,6 +13,7 @@ import ErrorPage from './pages/ErrorPage';
 import StyleMain from './styles/StyleMain';
 import { lightAppTheme, darkAppTheme } from './styles/AppThemes';
 import ThemeContext from './context/ThemeProviderContext';
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
   const { lightTheme } = useContext(ThemeContext);
@@ -23,6 +24,7 @@ function App() {
         <StyleMain>
           <Routes>
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
             <Route element={<RequireAuth />}>
               <Route path="/" element={<HomePage />} />
               <Route path="/hotels/:hotelId" element={<AvailableHotelsPage />} />

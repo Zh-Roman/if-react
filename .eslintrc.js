@@ -22,7 +22,6 @@ module.exports = {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'react/jsx-props-no-spreading': 'off',
     'max-len': 'off',
-    // 'react/prop-types': 'off',
     'react/require-default-props': 'off',
     'react/destructuring-assignment': 'off',
     'import/no-unresolved': 'off',
@@ -34,5 +33,6 @@ module.exports = {
     'default-param-last': 'off',
     'global-require': 'off',
     'consistent-return': 'off',
+    'react/jsx-no-useless-fragment': 'off',
   },
 };
